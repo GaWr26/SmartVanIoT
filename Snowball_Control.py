@@ -13,51 +13,47 @@ import pigpio
 
 import os #imports OS library for Shutdown control
 
-# Pigpio DHT22
+# Temperature & humidity Sensors
 pi = pigpio.pi()
 sensorIndoor = DHT22.sensor(pi, 23)
 sensorOutdoor = DHT22.sensor(pi, 24)
-
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM) # GPIO Nummern statt Board Nummern
-RELAIS_MAIN_GPIO = 12
-RELAIS_1_GPIO = 7
-GPIO.setup(RELAIS_MAIN_GPIO, GPIO.OUT)
-GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)
-
-messageCounter = 0
-lowVoltageCounter = 0
-lowVoltageShutdownValue = 12.00
-
-broker = "localhost"
-
-status_fridge = "off"
-status_mains = "off"
-
 DHT_Indor_sensor = 22
 DHT_Indor_pin = 23
 DHT_Outdoor_sensor = 22
 DHT_Outdoor_pin = 22
 loopCount = 0
 
-# Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
+# Relais
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM) # GPIO Nummern statt Board Nummern
+RELAIS_MAIN_GPIO = 12
+RELAIS_1_GPIO = 7
+GPIO.setup(RELAIS_MAIN_GPIO, GPIO.OUT)
+GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)
+status_fridge = "off"
+status_mains = "off"
+
+# Counters
+messageCounter = 0
+lowVoltageCounter = 0
+lowVoltageShutdownValue = 12.00
+
+broker = "localhost"
+
+# LED
 # NeoPixels must be connected to D10, D12, D18 or D21 to work.
 pixel_pin = board.D18
-
 # The number of NeoPixels
 num_pixels = 53
-
 # The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
 ORDER = neopixel.GRB
-
 pixels = neopixel.NeoPixel(
     pixel_pin, num_pixels, brightness=1, auto_write=False, pixel_order=ORDER
 )
-
 adc = Adafruit_ADS1x15.ADS1115() # Create an ADS1115 ADC (16-bit) instance
 
-
+# init
 print('')
 print('')
 print('********************************')
@@ -91,17 +87,6 @@ for x in range(1, 11):
 print("current zero-adjustment: " + str(sensorZeroAdj))
 print('')
 """
-def on_disconnect(client, userdata, rc):
-    if rc != 0:
-        print("Unexpected MQTT disconnection. Will auto-reconnect")
-
-def on_connect(client, userdata, flags, rc):
-    if rc==0:
-        client.connected_flag=True #set flag
-        print("MQTT connected OK")
-    else:
-        print("Bad connection Returned code=",rc)
-
 # helper to map analog values
 def remap_range(value, left_min, left_max, right_min, right_max):
     # this remaps a value from original (left) range to new (right) range
@@ -113,7 +98,18 @@ def remap_range(value, left_min, left_max, right_min, right_max):
     # Convert the 0-1 range into a value in the right range.
     return float(right_min + (valueScaled * right_span))
 
-#define callback
+# MQTT callbacks
+def on_disconnect(client, userdata, rc):
+    if rc != 0:
+        print("Unexpected MQTT disconnection. Will auto-reconnect")
+
+def on_connect(client, userdata, flags, rc):
+    if rc==0:
+        client.connected_flag=True #set flag
+        print("MQTT connected OK")
+    else:
+        print("Bad connection Returned code=",rc)
+
 def on_message(client, userdata, message):
     global status_mains
     global status_fridge
@@ -161,7 +157,7 @@ def on_message(client, userdata, message):
         print('')
         print('')
 
-
+# MQTT Client
 client = paho.Client("SnowballPI") #create client object client1.on_publish = on_publish #assign function to callback client1.connect(broker,port) #establish connection client1.publish("house/bulb1","on")
 paho.Client.connected_flag=False#create flag in class
 print("connecting to broker ",broker)
@@ -186,7 +182,8 @@ print('********************************')
 print('')
 print('')
 
-try: # Main program loop
+# Main program loop
+try:
     while True:
         print("Retrieving sensor data...")
         print('*********************************************')

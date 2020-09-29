@@ -1,3 +1,16 @@
 # SmartVanIoT
 
-Experimenting with Smart Sensors for my VW Camper Van
+Experimenting with Smart Sensors for my VW Camper Van.
+
+Gathering Sensor-Data for:
+- Battery voltage
+- Battery current
+- Temperature
+- Humidity
+
+Additionally controlling Relais for mains and all appliances.
+As I have digital LEDs in the Van, I also added control for these.
+If the voltage drops below a certain value, the mains relais shuts off and the raspberry pi shuts itself down.
+
+All communication is based on the MQTT protocol and I use an instance of IoBroker on the pi for the MQTT Broker.
+The brain is a Raspberry Pi Zero W which works great for this Application using 0.2 Amps in when idle.

@@ -8,7 +8,7 @@ Gathering Sensor-Data for:
 - Temperature
 - Humidity
 
-![Setup](/images/setup.jpg| width=100 | width=100)
+![Setup](/images/setup.jpg | width=100)
 
 Additionally controlling Relais for mains and all appliances.
 As I have digital LEDs in the Van, I also added control for these.

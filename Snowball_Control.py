@@ -71,22 +71,6 @@ print('')
 print('')
 GPIO.output(RELAIS_MAIN_GPIO, GPIO.HIGH)
 
-# Read the analog input a few times to makes sure that we get
-# a good zero adjustment from nominal center value. There should be no
-# current flowing while this is happening
-#sensorZeroAdj = 12432.6
-# 13278.7
-# 19485.8
-# 19542.9
-sensorZeroAdj = 19485.8
-"""
-error = 0
-for x in range(1, 11):
-    error = adc.read_adc(3);
-    sensorZeroAdj = ((sensorZeroAdj * (x-1)) + error)/x;
-print("current zero-adjustment: " + str(sensorZeroAdj))
-print('')
-"""
 # helper to map analog values
 def remap_range(value, left_min, left_max, right_min, right_max):
     # this remaps a value from original (left) range to new (right) range

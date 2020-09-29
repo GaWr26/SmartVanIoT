@@ -224,7 +224,7 @@ try:
             a1Value += adc.read_adc(3) #+ sensorZeroAdj;
         a1Value /= 10;
 
-        currentADC3 = ((((a1Value * 0.125) - 2377) / 66))
+        currentADC3 = (((a1Value * 0.125) - 2377) / 66)
         out_current = '{:.2f}'.format(currentADC3)
         print("Current: " + str(out_current) + " A")
         client.publish("battery/current",out_current)

@@ -18,6 +18,7 @@ All communication is based on the MQTT protocol and I use an instance of IoBroke
 The brain is a Raspberry Pi Zero W which works great for this Application using 0.2 Amps in when idle.
 
 To visualize everything I use an Android App called MQTT Dashboard where you can customize the Dashboard to your needs:
+
 ![Dashboard](/images/Dashboard_1.jpg)
 ![Dashboard](/images/Dashboard_2.jpg)
 ![Dashboard](/images/Dashboard_3.jpg)

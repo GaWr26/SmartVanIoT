@@ -17,10 +17,6 @@ import os #imports OS library for Shutdown control
 pi = pigpio.pi()
 sensorIndoor = DHT22.sensor(pi, 23)
 sensorOutdoor = DHT22.sensor(pi, 24)
-DHT_Indor_sensor = 22
-DHT_Indor_pin = 23
-DHT_Outdoor_sensor = 22
-DHT_Outdoor_pin = 22
 loopCount = 0
 
 # Relais

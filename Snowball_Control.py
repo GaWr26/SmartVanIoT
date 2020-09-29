@@ -11,9 +11,7 @@ import neopixel
 import DHT22
 import pigpio
 
-# my code/ not working...
-print("reading sensor")
-
+import os #imports OS library for Shutdown control
 
 # Pigpio DHT22
 pi = pigpio.pi()
@@ -28,6 +26,8 @@ GPIO.setup(RELAIS_MAIN_GPIO, GPIO.OUT)
 GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)
 
 messageCounter = 0
+lowVoltageCounter = 0
+lowVoltageShutdownValue = 12.00
 
 broker = "localhost"
 
@@ -68,6 +68,12 @@ print('[press ctrl+c to end the script]')
 print('')
 print('')
 
+# switch on mains on startup
+print("Switch on mains")
+print('********************************')
+print('')
+print('')
+GPIO.output(RELAIS_MAIN_GPIO, GPIO.HIGH)
 
 # Read the analog input a few times to makes sure that we get
 # a good zero adjustment from nominal center value. There should be no
@@ -95,6 +101,17 @@ def on_connect(client, userdata, flags, rc):
         print("MQTT connected OK")
     else:
         print("Bad connection Returned code=",rc)
+
+# helper to map analog values
+def remap_range(value, left_min, left_max, right_min, right_max):
+    # this remaps a value from original (left) range to new (right) range
+    # Figure out how 'wide' each range is
+    left_span = left_max - left_min
+    right_span = right_max - right_min
+    # Convert the left range into a 0-1 range (int)
+    valueScaled = float(value - left_min) / float(left_span)
+    # Convert the 0-1 range into a value in the right range.
+    return float(right_min + (valueScaled * right_span))
 
 #define callback
 def on_message(client, userdata, message):
@@ -169,19 +186,7 @@ print('********************************')
 print('')
 print('')
 
-
 try: # Main program loop
-    # helper to map analog values
-    def remap_range(value, left_min, left_max, right_min, right_max):
-        # this remaps a value from original (left) range to new (right) range
-        # Figure out how 'wide' each range is
-        left_span = left_max - left_min
-        right_span = right_max - right_min
-        # Convert the left range into a 0-1 range (int)
-        valueScaled = float(value - left_min) / float(left_span)
-        # Convert the 0-1 range into a value in the right range.
-        return float(right_min + (valueScaled * right_span))
-
     while True:
         print("Retrieving sensor data...")
         print('*********************************************')
@@ -198,7 +203,6 @@ try: # Main program loop
             client.publish("weather/inside/humidity",indoor_humidity)
             #sensorIndoor.cancel()
 
-
             sensorOutdoor.trigger()
             time.sleep(.03) # Necessary on faster Raspberry Pi's
             outdoor_humidity = ('{:3.2f}'.format(sensorOutdoor.humidity() / 1.))
@@ -207,35 +211,35 @@ try: # Main program loop
             client.publish("weather/outside/temperature",outdoor_temperature)
             client.publish("weather/outside/humidity",outdoor_humidity)
             #sensorOutdoor.cancel()
-            """
-             #Try to grab a sensor reading.  Use the read_retry method which will retry up
-             #to 15 times to get a sensor reading (waiting 2 seconds between each retry).
-            humidityIndoor, temperatureIndoor = Adafruit_DHT.read_retry(DHT_Indor_sensor, DHT_Indor_pin)
-            humidityOutdoor, temperatureOutdoor = Adafruit_DHT.read_retry(DHT_Outdoor_sensor, DHT_Outdoor_pin)
-            if humidityIndoor is not None and temperatureIndoor is not None:
-                print('Temp Inside:  {0:0.1f}C  Humidity Inside:  {1:0.1f}%'.format(temperatureIndoor, humidityIndoor))
-                formatted_indoor_temperature = "{:.2f}".format(temperatureIndoor)
-                client.publish("weather/inside/temperature",formatted_indoor_temperature)
-                client.publish("weather/inside/humidity",int(humidityIndoor))
-            else:
-                print('Failed to get Indoor Temperature reading. Try again!')
 
-            #outdoor temp/humidity
-            if humidityOutdoor is not None and temperatureOutdoor is not None:
-                print('Temp Outside: {0:0.1f}C  Humidity Outside: {1:0.1f}%'.format(temperatureOutdoor, humidityOutdoor))
-                formatted_outdoor_temperature = "{:.2f}".format(temperatureOutdoor)
-                client.publish("weather/outside/temperature",formatted_outdoor_temperature)
-                client.publish("weather/outside/humidity",int(humidityOutdoor))
-            else:
-                print('Failed to get Outdoor Temperature reading. Try again!')
-            """
         # Voltage
         a0Value = adc.read_adc(0) # Read the ADC channel 0 value
         formatVoltage = remap_range(a0Value, 0, 32767, 0, 25)
-        out_voltage = '{:.2f}'.format(formatVoltage/122*100)
+        out_voltage = '{:.2f}'.format(formatVoltage/120.2*100)
         print("Voltage: " + str(out_voltage) + " V")
         client.publish("battery/voltage",out_voltage)
         client.publish("battery/voltage_bar",(formatVoltage/122*1000))
+
+        # check for low Voltage and potentially shut everything down
+        if float(out_voltage) < lowVoltageShutdownValue:
+            # check 5 times
+            lowVoltageCounter += 1
+            print("Low Voltage detected. Will shut down if no change...")
+            if lowVoltageCounter >= 5:
+                print('')
+                print('')
+                print("Contious Low Voltage detected. Will shut down now.")
+                print('*********************************************')
+                print('')
+                print('')
+                # switch off mains relais
+                GPIO.output(RELAIS_MAIN_GPIO, GPIO.LOW)
+                #shutdown system
+                os.system("shutdown now -h")
+        else:
+            # reset counter if next reading is above threshold
+            lowVoltageCounter = 0
+
 
         # Current
         # get 10 readings and average
@@ -243,31 +247,16 @@ try: # Main program loop
         for x in range(1, 11):
             a1Value += adc.read_adc(3) #+ sensorZeroAdj;
         a1Value /= 10;
-        """
-        formatCurrent = remap_range(a1Value, 0, 65534, 0, 5)
-        liveCurrent = (formatCurrent - 2.5)*1000/66
-        out_current = '{:.2f}'.format(liveCurrent)
-        print("Current: " + str(out_current) + " A")
-        client.publish("battery/current",out_current)
-        """
 
-        # You have to calibrate the sensor!
-        #M y function: I (in Amps) = ([Measured voltage in mV] - 2309.098) / 92.10048
-        # Current = ((a1Value* 0.1875) - 2309.098 ) / 92.10048; //This should give the output in AMPS
-        currentADC3 = ((((a1Value * 0.125) - 2367) / 66))
+        currentADC3 = ((((a1Value * 0.125) - 2377) / 66))
         out_current = '{:.2f}'.format(currentADC3)
         print("Current: " + str(out_current) + " A")
         client.publish("battery/current",out_current)
-
-
 
         # Power
         power = '{:.2f}'.format(formatVoltage * currentADC3)
         print("Power:   " + str(power) + " W")
         client.publish("battery/power", power)
-
-
-
 
         print('*********************************************')
         print('')
@@ -276,6 +265,7 @@ try: # Main program loop
         if loopCount == 20:
             loopCount = 0;
         time.sleep(30)
+
 
 # Scavenging work after the end of the program
 except KeyboardInterrupt:

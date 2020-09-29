@@ -1,6 +1,6 @@
 # SmartVanIoT
 
-Experimenting with Smart Sensors for my VW Camper Van.
+Experimenting with Sensors for my VW Camper Van.
 
 Gathering Sensor-Data for:
 - Battery voltage

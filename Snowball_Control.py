@@ -17,7 +17,6 @@ import os #imports OS library for Shutdown control
 pi = pigpio.pi()
 sensorIndoor = DHT22.sensor(pi, 23)
 sensorOutdoor = DHT22.sensor(pi, 24)
-loopCount = 0
 
 # Relais
 GPIO.setwarnings(False)
@@ -32,6 +31,7 @@ status_mains = "off"
 # Counters
 messageCounter = 0
 lowVoltageCounter = 0
+loopCount = 0
 lowVoltageShutdownValue = 12.00
 
 broker = "localhost"
@@ -139,8 +139,7 @@ def on_message(client, userdata, message):
 
 # MQTT Client
 client = paho.Client("SnowballPI") #create client object client1.on_publish = on_publish #assign function to callback client1.connect(broker,port) #establish connection client1.publish("house/bulb1","on")
-paho.Client.connected_flag=False#create flag in class
-print("connecting to broker ",broker)
+paho.Client.connected_flag = False#create flag in class
 client.on_message = on_message
 client.on_connect = on_connect
 client.on_disconnect = on_disconnect
@@ -168,9 +167,9 @@ try:
         print("Retrieving sensor data...")
         print('*********************************************')
 
-        #indoor temp/humidity
+        # read temp/humidity every 20 cycles as not needed so often
         if loopCount == 0:
-
+            # temp/humidity
             sensorIndoor.trigger()
             time.sleep(.03) # Necessary on faster Raspberry Pi's
             indoor_humidity = ('{:3.2f}'.format(sensorIndoor.humidity() / 1.))

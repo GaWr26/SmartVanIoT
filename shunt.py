@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
-# Advanced - Manual Gain, High Resolution Example
+import RPi.GPIO as GPIO
+import serial
 import time
 import board
 import adafruit_dht
 import urllib.request
-
+import logging
 
 
 import paho.mqtt.client as mqtt
@@ -14,12 +15,23 @@ import paho.mqtt.client as mqtt
 from ina219 import INA219
 from ina219 import DeviceRangeError
 
+ser = serial.Serial('/dev/ttyS0',115200)
+ser.flushInput()
+
+power_key = 6
+rec_buff = ''
+rec_buff2 = ''
+time_count = 0
+last_position = ''
+last_lat = 0
+last_long = 0
+
 # Set the constants that were calculated
 SHUNT_OHMS = 0.0015
 MAX_EXPECTED_AMPS = 50
 
 # Initial the dht device, with data pin connected to:
-dhtDevice = adafruit_dht.DHT22(board.D18)
+dhtDeviceInside = adafruit_dht.DHT22(board.D18)
 
 
 last_temp_inside = 0
@@ -52,6 +64,9 @@ def read():
     global last_current
     global last_voltage
     global last_power
+    global last_position
+    global last_lat
+    global last_long
     global start
     global firstrun
 
@@ -64,7 +79,7 @@ def read():
         last_power = ina.power()/1000
         print("Bus Current: %.3f mA" % ina.current())
         print("Power: %.3f mW" % ina.power())
-        #print("Shunt voltage: %.3f mV" % ina.shunt_voltage())
+        print("Shunt voltage: %.3f mV" % ina.shunt_voltage())
         print("")
         print("")
     except DeviceRangeError as e:
@@ -72,8 +87,8 @@ def read():
 
     try:
         # Print the values to the serial port
-        temperature_c = dhtDevice.temperature
-        humidity = dhtDevice.humidity
+        temperature_c = dhtDeviceInside.temperature
+        humidity = dhtDeviceInside.humidity
         print(
             "Temp: {:.1f} C    Humidity: {}% ".format(
                 temperature_c, humidity
@@ -87,12 +102,13 @@ def read():
         # Errors happen fairly often, DHT's are hard to read, just keep going
         print(error.args[0])
         print("")
-
-
-        #time.sleep(2.0)
     except Exception as error:
-        dhtDevice.exit()
+        dhtDeviceInside.exit()
         raise error
+
+
+
+
 
     # SEND IT - to MQTT
     client.publish("snowball/sensor/temp_inside",last_temp_inside)
@@ -102,15 +118,38 @@ def read():
     client.publish("snowball/sensor/battery_current", last_current)
     client.publish("snowball/sensor/battery_power", last_power)
 
+    if firstrun == False:
+        client.publish("snowball/position/latitude", last_lat)
+        client.publish("snowball/position/longitude", last_long)
+
     done = time.time()
     elapsed = done - start
-    print(elapsed)
+    #print(elapsed)
     if elapsed >= 3600 or firstrun == True:
         firstrun = False
         start = time.time()
+
+        try:
+            power_on(power_key)
+            get_gps_position()
+            power_down(power_key)
+        except:
+        	if ser != None:
+        		ser.close()
+        	power_down(power_key)
+        	GPIO.cleanup()
+        if ser != None:
+        		ser.close()
+        		GPIO.cleanup()
+
+        last_lat = float(last_position[25:36])/100
+        last_long = float(last_position[39:51])/100
+
         print("------------- Update thingspeak ------------- ")
         if(connect()):
             print("------------- send via wifi -------------")
+
+
             urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field1=" + str(last_humid_inside))
             time.sleep(5)
             urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field2=" + str(last_temp_inside))
@@ -120,8 +159,17 @@ def read():
             urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field4=" + str(last_voltage))
             time.sleep(5)
             urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field5=" + str(last_power))
+            time.sleep(5)
+            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field6=" + str(last_lat))
+            time.sleep(5)
+            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field7=" + str(last_long))
         else:
             print("send via SIM")
+            #send_at('AT+CSQ','OK',1)
+            #send_at('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
+            #send_at('AT+HTTPINIT','OK',1)
+            #send_at('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field1="','OK',1)
+            #send_at('AT+HTTPACTION=0 ','OK',1)
 
 
 
@@ -146,7 +194,68 @@ def connect(host='http://google.com'):
     except:
         return False
 
+def power_on(power_key):
+	print('SIM7600X is starting:')
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setwarnings(False)
+	ser.flushInput()
+	print('SIM7600X is ready')
 
+
+def send_at(command,back,timeout):
+
+    global last_position
+    rec_buff = ''
+    ser.write((command+'\r\n').encode())
+    time.sleep(timeout)
+    if ser.inWaiting():
+        time.sleep(0.01 )
+        rec_buff = ser.read(ser.inWaiting())
+        if rec_buff != '':
+            if back not in rec_buff.decode():
+                #print(command + ' ERROR')
+                print(command + ' back:\t' + rec_buff.decode())
+                return 0
+            else:
+                last_position = rec_buff.decode()
+                return 1
+        else:
+            print('Modem is not ready')
+            return 0
+
+#+CGPSINFO: 4804.512069,N,01114.890322,E,180322,141108.0,599.7,0.0,
+
+def get_gps_position():
+    rec_null = True
+    answer = 0
+    print('Start GPS session...')
+    rec_buff = ''
+    send_at('AT+CGPS=1,1','OK',1)
+    time.sleep(2)
+    while rec_null:
+
+        answer = send_at('AT+CGPSINFO','+CGPSINFO: ',1)
+        if 1 == answer:
+            answer = 0
+            if ',,,,,,' in rec_buff:
+                print('GPS is not ready')
+                rec_null = False
+                time.sleep(1)
+            else:
+                print("GPS OK")
+                rec_null = False
+        else:
+            print('error %d'%answer)
+            rec_buff = ''
+            send_at('AT+CGPS=0','OK',1)
+            return False
+        time.sleep(1.5)
+
+
+
+def power_down(power_key):
+	print('SIM7600X is loging off:')
+	print('Good bye')
 
 if __name__ == "__main__":
     client = mqtt.Client("Pi") #create new instance

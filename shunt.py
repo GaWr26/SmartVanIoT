@@ -4,6 +4,9 @@
 import time
 import board
 import adafruit_dht
+import urllib.request
+
+
 
 import paho.mqtt.client as mqtt
 
@@ -25,6 +28,10 @@ last_current = 0
 last_voltage = 0
 last_power = 0
 
+start = time.time()
+firstrun = True
+
+
 # you can pass DHT22 use_pulseio=False if you wouldn't like to use pulseio.
 # This may be necessary on a Linux single board computer like the Raspberry Pi,
 # but it will not work in CircuitPython.
@@ -45,6 +52,9 @@ def read():
     global last_current
     global last_voltage
     global last_power
+    global start
+    global firstrun
+
 
 	# Prints the values to the console
     print("Bus Voltage: %.3f V" % ina.voltage())
@@ -92,6 +102,29 @@ def read():
     client.publish("snowball/sensor/battery_current", last_current)
     client.publish("snowball/sensor/battery_power", last_power)
 
+    done = time.time()
+    elapsed = done - start
+    print(elapsed)
+    if elapsed >= 3600 or firstrun == True:
+        firstrun = False
+        start = time.time()
+        print("------------- Update thingspeak ------------- ")
+        if(connect()):
+            print("------------- send via wifi -------------")
+            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field1=" + str(last_humid_inside))
+            time.sleep(5)
+            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field2=" + str(last_temp_inside))
+            time.sleep(5)
+            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field3=" + str(last_current))
+            time.sleep(5)
+            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field4=" + str(last_voltage))
+            time.sleep(5)
+            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field5=" + str(last_power))
+        else:
+            print("send via SIM")
+
+
+
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -106,6 +139,12 @@ def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.payload))
 
 
+def connect(host='http://google.com'):
+    try:
+        urllib.request.urlopen(host) #Python 3.x
+        return True
+    except:
+        return False
 
 
 

@@ -53,7 +53,7 @@ firstrun = True
 
 def read():
 	# Instantiate the ina object with the above constants
-    ina = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS)
+    ina = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, address=0x40)
 	# Configure the object with the expected bus voltage
 	# (either up to 16V or up to 32V with .RANGE_32V)
 	# Also, configure the gain to be GAIN_2_80MW for the above example
@@ -119,8 +119,7 @@ def read():
     client.publish("snowball/sensor/battery_power", last_power)
 
     if firstrun == False:
-        client.publish("snowball/position/latitude", last_lat)
-        client.publish("snowball/position/longitude", last_long)
+        client.publish("snowball/position/lat_long", str(last_lat) + "," + str(last_long) + ",0.0000000,0.0")
 
     done = time.time()
     elapsed = done - start
@@ -218,6 +217,7 @@ def send_at(command,back,timeout):
                 return 0
             else:
                 last_position = rec_buff.decode()
+                print(last_position)
                 return 1
         else:
             print('Modem is not ready')
@@ -239,7 +239,7 @@ def get_gps_position():
             answer = 0
             if ',,,,,,' in rec_buff:
                 print('GPS is not ready')
-                rec_null = False
+                rec_null = True
                 time.sleep(1)
             else:
                 print("GPS OK")

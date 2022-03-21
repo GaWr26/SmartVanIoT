@@ -9,6 +9,7 @@ import urllib.request
 import logging
 import board
 import neopixel
+import re
 
 
 import paho.mqtt.client as mqtt
@@ -38,9 +39,10 @@ MAX_EXPECTED_AMPS = 50
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
 # NeoPixels must be connected to D10, D12, D18 or D21 to work.
 pixel_pin = board.D21
-
 # The number of NeoPixels
 num_pixels = 30
+dimmer = 100
+last_color = [255, 255, 255]
 
 # The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
@@ -197,12 +199,15 @@ def on_connect(client, userdata, flags, rc):
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
     client.subscribe("snowball/light/set_color")
+    client.subscribe("snowball/light/dimmer")
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     print("Received Message: " + msg.topic+" "+str(msg.payload))
     if msg.topic == 'snowball/light/set_color':
         setLightColor(str(msg.payload)[3:9])
+    elif msg.topic == 'snowball/light/dimmer':
+        setLightDimmer(str(msg.payload))
 
 def hex_to_rgb(hex):
   rgb = []
@@ -214,14 +219,21 @@ def hex_to_rgb(hex):
 
 
 def setLightColor(color_hex):
-    index = [0, 2, 1]
-    print(hex_to_rgb(color_hex))
-    # R B G
-    pixels.fill(hex_to_rgb(color_hex))
+    global last_color
+    last_color = hex_to_rgb(color_hex)
+    pixels.fill(last_color)
     # Uncomment this line if you have RGBW/GRBW NeoPixels
     # pixels.fill((255, 0, 0, 0))
     pixels.show()
     time.sleep(1)
+
+def setLightDimmer(dimmer):
+    global last_color
+    new_value = int(re.findall(r"'(.*?)'", dimmer)[0])/100
+    dimmed_color = [int(last_color[0]*new_value), int(last_color[1]*new_value), int(last_color[2]*new_value)]
+    pixels.fill(dimmed_color)
+    pixels.show()
+    #time.sleep(1)
 
 def connect(host='http://google.com'):
     try:

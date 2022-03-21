@@ -7,6 +7,8 @@ import board
 import adafruit_dht
 import urllib.request
 import logging
+import board
+import neopixel
 
 
 import paho.mqtt.client as mqtt
@@ -15,8 +17,8 @@ import paho.mqtt.client as mqtt
 from ina219 import INA219
 from ina219 import DeviceRangeError
 
-ser = serial.Serial('/dev/ttyS0',115200)
-ser.flushInput()
+#ser = serial.Serial('/dev/ttyUSB3',115200)
+#ser.flushInput()
 
 power_key = 6
 rec_buff = ''
@@ -31,7 +33,22 @@ SHUNT_OHMS = 0.0015
 MAX_EXPECTED_AMPS = 50
 
 # Initial the dht device, with data pin connected to:
-dhtDeviceInside = adafruit_dht.DHT22(board.D18)
+#dhtDeviceInside = adafruit_dht.DHT22(board.D18)
+
+# Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
+# NeoPixels must be connected to D10, D12, D18 or D21 to work.
+pixel_pin = board.D21
+
+# The number of NeoPixels
+num_pixels = 30
+
+# The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
+# For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
+ORDER = neopixel.GRB
+
+pixels = neopixel.NeoPixel(
+    pixel_pin, num_pixels, brightness=0.2, auto_write=False, pixel_order=ORDER
+)
 
 
 last_temp_inside = 0
@@ -175,16 +192,36 @@ def read():
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
-    print("Connected with result code "+str(rc))
+    print("Connected to Broker with result code "+str(rc))
 
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
-    client.subscribe("snowball/weather/inside")
+    client.subscribe("snowball/light/set_color")
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-    print(msg.topic+" "+str(msg.payload))
+    print("Received Message: " + msg.topic+" "+str(msg.payload))
+    if msg.topic == 'snowball/light/set_color':
+        setLightColor(str(msg.payload)[3:9])
 
+def hex_to_rgb(hex):
+  rgb = []
+  for i in (0, 2, 4):
+    decimal = int(hex[i:i+2], 16)
+    rgb.append(decimal)
+
+  return rgb[0], rgb[2], rgb[1]
+
+
+def setLightColor(color_hex):
+    index = [0, 2, 1]
+    print(hex_to_rgb(color_hex))
+    # R B G
+    pixels.fill(hex_to_rgb(color_hex))
+    # Uncomment this line if you have RGBW/GRBW NeoPixels
+    # pixels.fill((255, 0, 0, 0))
+    pixels.show()
+    time.sleep(1)
 
 def connect(host='http://google.com'):
     try:
@@ -258,9 +295,17 @@ def power_down(power_key):
 	print('Good bye')
 
 if __name__ == "__main__":
+    print("Starting up...")
+    print("Connecting to MQTT Broker...")
+    print("")
     client = mqtt.Client("Pi") #create new instance
     client.connect("127.0.0.1", 1883, 60)
+    client.on_connect = on_connect
+    client.on_message = on_message
+    client.loop_start()
 
+
+    print("Startup finished - going into loop")
     while True:
-        read()
+        #read()
         time.sleep(2)

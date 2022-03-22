@@ -4,47 +4,52 @@ import RPi.GPIO as GPIO
 import serial
 import time
 import board
-import adafruit_dht
 import urllib.request
 import logging
 import board
 import neopixel
 import re
-
-
 import paho.mqtt.client as mqtt
-
 
 from ina219 import INA219
 from ina219 import DeviceRangeError
+from pigpio_dht import DHT11, DHT22
+from mpu6050 import mpu6050
 
-#ser = serial.Serial('/dev/ttyUSB3',115200)
-#ser.flushInput()
+ser = serial.Serial('/dev/ttyUSB3',115200)
+ser.flushInput()
 
 power_key = 6
 rec_buff = ''
 rec_buff2 = ''
 time_count = 0
+
 last_position = ''
 last_lat = 0
 last_long = 0
+last_acc_x = 0
+last_acc_y = 0
+last_temp_inside = 0
+last_humid_inside = 0
+last_draw_current = 0
+last_draw_voltage = 0
+last_draw_power = 0
+last_charge_current = 0
+last_charge_voltage = 0
+last_charge_power = 0
 
 # Set the constants that were calculated
 SHUNT_OHMS = 0.0015
 MAX_EXPECTED_AMPS = 50
 
-# Initial the dht device, with data pin connected to:
-#dhtDeviceInside = adafruit_dht.DHT22(board.D18)
+dht_gpio = 18
 
-# Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
-# NeoPixels must be connected to D10, D12, D18 or D21 to work.
+mpu = mpu6050(0x68)
+
 pixel_pin = board.D21
-# The number of NeoPixels
 num_pixels = 30
 dimmer = 100
 last_color = [255, 255, 255]
-
-# The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
 ORDER = neopixel.GRB
 
@@ -53,11 +58,7 @@ pixels = neopixel.NeoPixel(
 )
 
 
-last_temp_inside = 0
-last_humid_inside = 0
-last_current = 0
-last_voltage = 0
-last_power = 0
+
 
 start = time.time()
 firstrun = True
@@ -69,73 +70,108 @@ firstrun = True
 # dhtDevice = adafruit_dht.DHT22(board.D18, use_pulseio=False)
 
 
-
+skipcounter = 0
 def read():
 	# Instantiate the ina object with the above constants
-    ina = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, address=0x40)
+    ina_draw = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, address=0x40)
+    ina_charge = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, address=0x44)
 	# Configure the object with the expected bus voltage
 	# (either up to 16V or up to 32V with .RANGE_32V)
 	# Also, configure the gain to be GAIN_2_80MW for the above example
-    ina.configure(ina.RANGE_16V, ina.GAIN_2_80MV)
+    ina_draw.configure(ina_draw.RANGE_16V, ina_draw.GAIN_2_80MV)
+    ina_charge.configure(ina_charge.RANGE_16V, ina_charge.GAIN_2_80MV)
 
     global last_temp_inside
     global last_humid_inside
-    global last_current
-    global last_voltage
-    global last_power
+    global last_draw_current
+    global last_draw_voltage
+    global last_draw_power
+    global last_charge_current
+    global last_charge_voltage
+    global last_charge_power
     global last_position
     global last_lat
     global last_long
     global start
     global firstrun
+    global skipcounter
+    global last_acc_x
+    global last_acc_y
 
 
-	# Prints the values to the console
-    print("Bus Voltage: %.3f V" % ina.voltage())
-    last_voltage = ina.voltage()
+    print("Draw Bus Voltage: %.3f V" % ina_draw.voltage())
+    last_draw_voltage = ina_draw.voltage()
     try:
-        last_current = ina.current()/1000
-        last_power = ina.power()/1000
-        print("Bus Current: %.3f mA" % ina.current())
-        print("Power: %.3f mW" % ina.power())
-        print("Shunt voltage: %.3f mV" % ina.shunt_voltage())
+        last_draw_current = ina_draw.current()/1000
+        last_draw_power = ina_draw.power()/1000
+        print("Draw Bus Current: %.3f mA" % ina.current())
+        print("Draw Power: %.3f mW" % ina_draw.power())
+        print("Draw Shunt voltage: %.3f mV" % ina_draw.shunt_voltage())
         print("")
         print("")
     except DeviceRangeError as e:
-        print("Current overflow")
+        print("Draw Current overflow")
+
+
+    print("Charge Bus Voltage: %.3f V" % ina_charge.voltage())
+    last_draw_voltage = ina_charge.voltage()
+    try:
+        last_draw_current = ina_charge.current()/1000
+        last_draw_power = ina_charge.power()/1000
+        print("Charge Bus Current: %.3f mA" % ina.current())
+        print("Charge Power: %.3f mW" % ina_charge.power())
+        print("Charge Shunt voltage: %.3f mV" % ina_charge.shunt_voltage())
+        print("")
+        print("")
+    except DeviceRangeError as e:
+        print("Charge Current overflow")
 
     try:
-        # Print the values to the serial port
-        temperature_c = dhtDeviceInside.temperature
-        humidity = dhtDeviceInside.humidity
-        print(
-            "Temp: {:.1f} C    Humidity: {}% ".format(
-                temperature_c, humidity
-            )
-        )
-        last_temp_inside = temperature_c
-        last_humid_inside = humidity
-        print("")
+        if skipcounter >= 10:
+            skipcounter = 0
+            #sensor = DHT11(gpio)
+            sensor = DHT22(dht_gpio)
 
-    except RuntimeError as error:
+            #results = re.findall(r'"(.*?)"', sensor.read())
+            #result = sensor.sample(samples=3)
+            result = sensor.read()
+            print(result + "got temperature -------------------------------------------------------------------")
+            #print(result.temp_c)
+            #print(result.humidity)
+            print("")
+
+    except:
         # Errors happen fairly often, DHT's are hard to read, just keep going
-        print(error.args[0])
+        print("Error reading DHT Sensor")
         print("")
-    except Exception as error:
-        dhtDeviceInside.exit()
-        raise error
 
+    skipcounter = skipcounter+1
 
-
+    accel_data = mpu.get_accel_data()
+    print("Acc X : "+str(accel_data['x']))
+    print("Acc Y : "+str(accel_data['y']))
+    print("Acc Z : "+str(accel_data['z']))
+    print()
+    gyro_data = mpu.get_gyro_data()
+    print("Gyro X : "+str(gyro_data['x']))
+    print("Gyro Y : "+str(gyro_data['y']))
+    print("Gyro Z : "+str(gyro_data['z']))
+    print()
+    print("-------------------------------")
+    last_acc_x = accel_data['x']
+    last_acc_y = accel_data['y']
 
 
     # SEND IT - to MQTT
     client.publish("snowball/sensor/temp_inside",last_temp_inside)
     client.publish("snowball/sensor/humidity_inside",last_humid_inside)
 
-    client.publish("snowball/sensor/battery_voltage", last_voltage)
-    client.publish("snowball/sensor/battery_current", last_current)
-    client.publish("snowball/sensor/battery_power", last_power)
+    client.publish("snowball/sensor/battery_draw_voltage", last_draw_voltage)
+    client.publish("snowball/sensor/battery_draw_current", last_draw_current)
+    client.publish("snowball/sensor/battery_draw_power", last_draw_power)
+
+    client.publish("snowball/sensor/accelerometer_x",last_acc_x)
+    client.publish("snowball/sensor/accelerometer_y",last_acc_y)
 
     if firstrun == False:
         client.publish("snowball/position/lat_long", str(last_lat) + "," + str(last_long) + ",0.0000000,0.0")
@@ -169,17 +205,17 @@ def read():
 
 
             urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field1=" + str(last_humid_inside))
-            time.sleep(5)
+            time.sleep(1)
             urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field2=" + str(last_temp_inside))
-            time.sleep(5)
-            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field3=" + str(last_current))
-            time.sleep(5)
-            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field4=" + str(last_voltage))
-            time.sleep(5)
-            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field5=" + str(last_power))
-            time.sleep(5)
+            time.sleep(1)
+            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field3=" + str(last_draw_current))
+            time.sleep(1)
+            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field4=" + str(last_draw_voltage))
+            time.sleep(1)
+            urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field5=" + str(last_draw_power))
+            time.sleep(1)
             urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field6=" + str(last_lat))
-            time.sleep(5)
+            time.sleep(1)
             urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field7=" + str(last_long))
         else:
             print("send via SIM")
@@ -215,7 +251,7 @@ def hex_to_rgb(hex):
     decimal = int(hex[i:i+2], 16)
     rgb.append(decimal)
 
-  return rgb[0], rgb[2], rgb[1]
+  return rgb
 
 
 def setLightColor(color_hex):
@@ -319,5 +355,5 @@ if __name__ == "__main__":
 
     print("Startup finished - going into loop")
     while True:
-        #read()
+        read()
         time.sleep(2)

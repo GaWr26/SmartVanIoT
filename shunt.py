@@ -10,6 +10,8 @@ import board
 import neopixel
 import re
 import paho.mqtt.client as mqtt
+import adafruit_ahtx0
+
 
 from ina219 import INA219
 from ina219 import DeviceRangeError
@@ -51,14 +53,24 @@ num_pixels = 30
 dimmer = 100
 last_color = [255, 255, 255]
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
-ORDER = neopixel.GRB
+ORDER = neopixel.RGB
 
 pixels = neopixel.NeoPixel(
     pixel_pin, num_pixels, brightness=0.2, auto_write=False, pixel_order=ORDER
 )
 
+indoorTempSensor = adafruit_ahtx0.AHTx0(board.I2C())
 
+GPIO.setmode(GPIO.BCM)
 
+RELAIS_1_GPIO = 5
+RELAIS_2_GPIO = 6
+RELAIS_4_GPIO = 19
+RELAIS_3_GPIO = 13
+GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)
+GPIO.setup(RELAIS_2_GPIO, GPIO.OUT)
+GPIO.setup(RELAIS_3_GPIO, GPIO.OUT)
+GPIO.setup(RELAIS_4_GPIO, GPIO.OUT)
 
 start = time.time()
 firstrun = True
@@ -73,8 +85,8 @@ firstrun = True
 skipcounter = 0
 def read():
 	# Instantiate the ina object with the above constants
-    ina_draw = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, address=0x40)
-    ina_charge = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, address=0x44)
+    ina_draw = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, address=0x44)
+    ina_charge = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, address=0x40)
 	# Configure the object with the expected bus voltage
 	# (either up to 16V or up to 32V with .RANGE_32V)
 	# Also, configure the gain to be GAIN_2_80MW for the above example
@@ -103,9 +115,9 @@ def read():
     last_draw_voltage = ina_draw.voltage()
     try:
         last_draw_current = ina_draw.current()/1000
-        last_draw_power = ina_draw.power()/1000
-        print("Draw Bus Current: %.3f mA" % ina.current())
-        print("Draw Power: %.3f mW" % ina_draw.power())
+        last_draw_power = (ina_draw.power()/1000) * -1
+        print("Draw Bus Current: %.3f mA" % ina_draw.current())
+        print("Draw Power: %.3f mW" % (ina_draw.power()* -1))
         print("Draw Shunt voltage: %.3f mV" % ina_draw.shunt_voltage())
         print("")
         print("")
@@ -114,11 +126,11 @@ def read():
 
 
     print("Charge Bus Voltage: %.3f V" % ina_charge.voltage())
-    last_draw_voltage = ina_charge.voltage()
+    last_charge_voltage = ina_charge.voltage()
     try:
-        last_draw_current = ina_charge.current()/1000
-        last_draw_power = ina_charge.power()/1000
-        print("Charge Bus Current: %.3f mA" % ina.current())
+        last_charge_current = ina_charge.current()/1000
+        last_charge_power = ina_charge.power()/1000
+        print("Charge Bus Current: %.3f mA" % ina_charge.current())
         print("Charge Power: %.3f mW" % ina_charge.power())
         print("Charge Shunt voltage: %.3f mV" % ina_charge.shunt_voltage())
         print("")
@@ -126,40 +138,27 @@ def read():
     except DeviceRangeError as e:
         print("Charge Current overflow")
 
-    try:
-        if skipcounter >= 10:
-            skipcounter = 0
-            #sensor = DHT11(gpio)
-            sensor = DHT22(dht_gpio)
 
-            #results = re.findall(r'"(.*?)"', sensor.read())
-            #result = sensor.sample(samples=3)
-            result = sensor.read()
-            print(result + "got temperature -------------------------------------------------------------------")
-            #print(result.temp_c)
-            #print(result.humidity)
-            print("")
-
-    except:
-        # Errors happen fairly often, DHT's are hard to read, just keep going
-        print("Error reading DHT Sensor")
-        print("")
+    print("\nTemperature: %0.1f C" % indoorTempSensor.temperature)
+    print("Humidity: %0.1f %%" % indoorTempSensor.relative_humidity)
+    last_temp_inside = indoorTempSensor.temperature
+    last_humid_inside = indoorTempSensor.relative_humidity
 
     skipcounter = skipcounter+1
 
     accel_data = mpu.get_accel_data()
-    print("Acc X : "+str(accel_data['x']))
-    print("Acc Y : "+str(accel_data['y']))
-    print("Acc Z : "+str(accel_data['z']))
-    print()
+    #print("Acc X : "+str(accel_data['x']))
+    #print("Acc Y : "+str(accel_data['y']))
+    #print("Acc Z : "+str(accel_data['z']))
+    #print()
     gyro_data = mpu.get_gyro_data()
-    print("Gyro X : "+str(gyro_data['x']))
-    print("Gyro Y : "+str(gyro_data['y']))
-    print("Gyro Z : "+str(gyro_data['z']))
-    print()
-    print("-------------------------------")
-    last_acc_x = accel_data['x']
-    last_acc_y = accel_data['y']
+    #print("Gyro X : "+str(gyro_data['x']))
+    #print("Gyro Y : "+str(gyro_data['y']))
+    #print("Gyro Z : "+str(gyro_data['z']))
+    #print()
+    #print("-------------------------------")
+    last_acc_x = accel_data['x']*100-30+100
+    last_acc_y = accel_data['y']*100+30+100
 
 
     # SEND IT - to MQTT
@@ -169,6 +168,10 @@ def read():
     client.publish("snowball/sensor/battery_draw_voltage", last_draw_voltage)
     client.publish("snowball/sensor/battery_draw_current", last_draw_current)
     client.publish("snowball/sensor/battery_draw_power", last_draw_power)
+
+    client.publish("snowball/sensor/battery_charge_voltage", last_charge_voltage)
+    client.publish("snowball/sensor/battery_charge_current", last_charge_current)
+    client.publish("snowball/sensor/battery_charge_power", last_charge_power)
 
     client.publish("snowball/sensor/accelerometer_x",last_acc_x)
     client.publish("snowball/sensor/accelerometer_y",last_acc_y)
@@ -184,20 +187,18 @@ def read():
         start = time.time()
 
         try:
-            power_on(power_key)
             get_gps_position()
-            power_down(power_key)
         except:
         	if ser != None:
         		ser.close()
         	power_down(power_key)
-        	GPIO.cleanup()
         if ser != None:
         		ser.close()
-        		GPIO.cleanup()
-
-        last_lat = float(last_position[25:36])/100
-        last_long = float(last_position[39:51])/100
+        try:
+            last_lat = float(last_position[25:36])/100
+            last_long = float(last_position[39:51])/100
+        except:
+            print("Noch kein GPS Signal bekommen")
 
         print("------------- Update thingspeak ------------- ")
         if(connect()):
@@ -236,6 +237,10 @@ def on_connect(client, userdata, flags, rc):
     # reconnect then subscriptions will be renewed.
     client.subscribe("snowball/light/set_color")
     client.subscribe("snowball/light/dimmer")
+    client.subscribe("snowball/switch/1")
+    client.subscribe("snowball/switch/2")
+    client.subscribe("snowball/switch/3")
+    client.subscribe("snowball/switch/4")
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
@@ -244,6 +249,25 @@ def on_message(client, userdata, msg):
         setLightColor(str(msg.payload)[3:9])
     elif msg.topic == 'snowball/light/dimmer':
         setLightDimmer(str(msg.payload))
+    elif msg.topic == 'snowball/switch/1':
+        toggleSwitch(msg.topic[-1], msg.payload)
+    elif msg.topic == 'snowball/switch/2':
+        toggleSwitch(msg.topic[-1], msg.payload)
+    elif msg.topic == 'snowball/switch/3':
+        toggleSwitch(msg.topic[-1], msg.payload)
+    elif msg.topic == 'snowball/switch/4':
+        toggleSwitch(msg.topic[-1], msg.payload)
+
+def toggleSwitch(switch, value):
+    new_value = re.findall(r"'(.*?)'", str(value))[0]
+    print(switch, new_value)
+    if new_value == "on":
+        print("switch on")
+        GPIO.output(eval("RELAIS_"+switch+"_GPIO"), GPIO.HIGH) # an
+    else:
+        print("switch off")
+        GPIO.output(eval("RELAIS_"+switch+"_GPIO"), GPIO.LOW) # an
+
 
 def hex_to_rgb(hex):
   rgb = []
@@ -251,7 +275,8 @@ def hex_to_rgb(hex):
     decimal = int(hex[i:i+2], 16)
     rgb.append(decimal)
 
-  return rgb
+  return tuple(rgb)
+
 
 
 def setLightColor(color_hex):
@@ -278,12 +303,6 @@ def connect(host='http://google.com'):
     except:
         return False
 
-def power_on(power_key):
-	print('SIM7600X is starting:')
-	GPIO.setmode(GPIO.BCM)
-	GPIO.setwarnings(False)
-	ser.flushInput()
-	print('SIM7600X is ready')
 
 
 def send_at(command,back,timeout):
@@ -334,13 +353,8 @@ def get_gps_position():
             rec_buff = ''
             send_at('AT+CGPS=0','OK',1)
             return False
-        time.sleep(1.5)
 
 
-
-def power_down(power_key):
-	print('SIM7600X is loging off:')
-	print('Good bye')
 
 if __name__ == "__main__":
     print("Starting up...")

@@ -5,7 +5,13 @@
 import time
 import board
 import neopixel
+import RPi.GPIO as GPIO
 
+
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(6, GPIO.OUT)
+GPIO.output(6, GPIO.HIGH)
 
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
 # NeoPixels must be connected to D10, D12, D18 or D21 to work.

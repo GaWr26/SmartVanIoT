@@ -11,6 +11,8 @@ import neopixel
 import re
 import paho.mqtt.client as mqtt
 import adafruit_ahtx0
+import Adafruit_DHT
+
 
 
 from ina219 import INA219
@@ -33,12 +35,15 @@ last_acc_x = 0
 last_acc_y = 0
 last_temp_inside = 0
 last_humid_inside = 0
+last_temp_outside = 0
+last_humid_outside = 0
 last_draw_current = 0
 last_draw_voltage = 0
 last_draw_power = 0
 last_charge_current = 0
 last_charge_voltage = 0
 last_charge_power = 0
+last_color = [255, 255, 255]
 
 # Set the constants that were calculated
 SHUNT_OHMS = 0.0015
@@ -51,9 +56,9 @@ mpu = mpu6050(0x68)
 pixel_pin = board.D21
 num_pixels = 30
 dimmer = 100
-last_color = [255, 255, 255]
+
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
-ORDER = neopixel.RGB
+ORDER = neopixel.GRB
 
 pixels = neopixel.NeoPixel(
     pixel_pin, num_pixels, brightness=0.2, auto_write=False, pixel_order=ORDER
@@ -71,6 +76,9 @@ GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)
 GPIO.setup(RELAIS_2_GPIO, GPIO.OUT)
 GPIO.setup(RELAIS_3_GPIO, GPIO.OUT)
 GPIO.setup(RELAIS_4_GPIO, GPIO.OUT)
+
+# Taster
+GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 
 start = time.time()
 firstrun = True
@@ -95,6 +103,8 @@ def read():
 
     global last_temp_inside
     global last_humid_inside
+    global last_temp_outside
+    global last_humid_outside
     global last_draw_current
     global last_draw_voltage
     global last_draw_power
@@ -144,26 +154,21 @@ def read():
     last_temp_inside = indoorTempSensor.temperature
     last_humid_inside = indoorTempSensor.relative_humidity
 
+    try:
+        humidity, temperature = Adafruit_DHT.read_retry(22, 12)
+        last_temp_outside = temperature
+        last_humid_outside = humidity
+    except DeviceRangeError as e:
+        print("Error getting outside temperature")
     skipcounter = skipcounter+1
 
-    accel_data = mpu.get_accel_data()
-    #print("Acc X : "+str(accel_data['x']))
-    #print("Acc Y : "+str(accel_data['y']))
-    #print("Acc Z : "+str(accel_data['z']))
-    #print()
-    gyro_data = mpu.get_gyro_data()
-    #print("Gyro X : "+str(gyro_data['x']))
-    #print("Gyro Y : "+str(gyro_data['y']))
-    #print("Gyro Z : "+str(gyro_data['z']))
-    #print()
-    #print("-------------------------------")
-    last_acc_x = accel_data['x']*100-30+100
-    last_acc_y = accel_data['y']*100+30+100
-
+    get_smoothed_values()
 
     # SEND IT - to MQTT
     client.publish("snowball/sensor/temp_inside",last_temp_inside)
     client.publish("snowball/sensor/humidity_inside",last_humid_inside)
+    client.publish("snowball/sensor/temp_outside",last_temp_outside)
+    client.publish("snowball/sensor/humidity_outside",last_humid_outside)
 
     client.publish("snowball/sensor/battery_draw_voltage", last_draw_voltage)
     client.publish("snowball/sensor/battery_draw_current", last_draw_current)
@@ -191,7 +196,7 @@ def read():
         except:
         	if ser != None:
         		ser.close()
-        	power_down(power_key)
+        	#power_down(power_key)
         if ser != None:
         		ser.close()
         try:
@@ -227,6 +232,38 @@ def read():
             #send_at('AT+HTTPACTION=0 ','OK',1)
 
 
+def get_smoothed_values(n_samples=10):
+    global last_acc_x
+    global last_acc_y
+    """
+    Get smoothed values from the sensor by sampling
+    the sensor `n_samples` times and returning the mean.
+    """
+    #accel_data = mpu.get_accel_data()
+    #print("Acc X : "+str(accel_data['x']))
+    #print("Acc Y : "+str(accel_data['y']))
+    #print("Acc Z : "+str(accel_data['z']))
+    #print()
+    #gyro_data = mpu.get_gyro_data()
+    #print("Gyro X : "+str(gyro_data['x']))
+    #print("Gyro Y : "+str(gyro_data['y']))
+    #print("Gyro Z : "+str(gyro_data['z']))
+    #print()
+    #print("-------------------------------")
+    #last_acc_x = accel_data['x']*100-30+100
+    #last_acc_y = accel_data['y']*100+30+100
+
+    result = {}
+    for _ in range(n_samples):
+        data = mpu.get_accel_data()
+
+        for k in data.keys():
+            # Add on value / n_samples (to generate an average)
+            # with default of 0 for first loop.
+            result[k] = result.get(k, 0) + (data[k] / n_samples)
+    last_acc_x = str((result['x']-0.3))
+    last_acc_y = str((result['y']+0.3))
+    #return result
 
 
 # The callback for when the client receives a CONNACK response from the server.
@@ -277,7 +314,13 @@ def hex_to_rgb(hex):
 
   return tuple(rgb)
 
-
+def toggle_LEDs():
+    if GPIO.input(RELAIS_2_GPIO) == GPIO.HIGH:
+        GPIO.output(RELAIS_2_GPIO, GPIO.LOW) # an
+        client.publish("snowball/switch/2","off")
+    else:
+        GPIO.output(RELAIS_2_GPIO, GPIO.HIGH) # an
+        client.publish("snowball/switch/2","on")
 
 def setLightColor(color_hex):
     global last_color
@@ -369,5 +412,9 @@ if __name__ == "__main__":
 
     print("Startup finished - going into loop")
     while True:
+        print(GPIO.input(RELAIS_2_GPIO))
+        if GPIO.input(20) == GPIO.HIGH:
+            toggle_LEDs()
+            print("Button was pushed!")
         read()
         time.sleep(2)

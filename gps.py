@@ -1,87 +1,77 @@
-#!/usr/bin/python
-# -*- coding:utf-8 -*-
-import RPi.GPIO as GPIO
-
 import serial
 import time
 
-ser = serial.Serial('/dev/ttyS0',115200)
-ser.flushInput()
 
-power_key = 6
-rec_buff = ''
-rec_buff2 = ''
-time_count = 0
-last_msg = ''
+#SIM & GPS Module
+sim_serial = serial.Serial('/dev/ttyUSB3',115200)
 
 
-def power_on(power_key):
-	print('SIM7600X is starting:')
-	GPIO.setmode(GPIO.BCM)
-	GPIO.setwarnings(False)
-	#GPIO.setup(power_key,GPIO.OUT)
-	#time.sleep(0.1)
-	#GPIO.output(power_key,GPIO.HIGH)
-	#time.sleep(2)
-	#GPIO.output(power_key,GPIO.LOW)
-	#time.sleep(20)
-	ser.flushInput()
-	print('SIM7600X is ready')
+class UpdateGPS:
+    def __init__(self):
+        self._running = True
 
+    def terminate(self):
+        self._running = False
 
-def send_at(command,back,timeout):
-    rec_buff = ''
-    ser.write((command+'\r\n').encode())
-    time.sleep(timeout)
-    if ser.inWaiting():
-        time.sleep(0.01 )
-        rec_buff = ser.read(ser.inWaiting())
-        if rec_buff != '':
-            if back not in rec_buff.decode():
-                print(command + ' ERROR')
-                print(command + ' back:\t' + rec_buff.decode())
-                return 0
+    def send_at(self,command,back,timeout):
+
+        rec_buff = ''
+        sim_serial.write((command+'\r\n').encode())
+        time.sleep(timeout)
+        if sim_serial.inWaiting():
+            time.sleep(0.01 )
+            rec_buff = sim_serial.read(sim_serial.inWaiting())
+            if rec_buff != '':
+                if back not in rec_buff.decode():
+                    #print(command + ' ERROR')
+                    #print(command + ' back:\t' + rec_buff.decode())
+                    return 0
+                else:
+                    last_position = rec_buff.decode()
+                    try:
+                        sensordata["lat"] = float(last_position[25:36])/100
+                        sendordata["long"] = float(last_position[39:51])/100
+                        print('********************************')
+                        print('         GPS Success')
+                        print('********************************')
+                        print('')
+                        print('')
+                        print(last_position)
+                        print('')
+                        print('')
+                    except:
+                        print('********************************')
+                        print('         GPS Error')
+                        print('********************************')
+                        print('')
+                        print('')
+                    return 1
             else:
-                last_msg = rec_buff.decode()
-                print("Response: " + last_msg)
-                return 1
-        else:
-            print('Modem is not ready')
-            return 0
+                print('Modem is not ready')
+                return 0
 
-def send_gps_position():
-    answer = 0
-    print('Start GPS session...')
-    send_at('AT+CGPS=1,1','OK',1)
-    time.sleep(2)
-    answer = send_at('AT+CGPSINFO','+CGPSINFO: ',1)
-    #time.sleep(4)
-    gpsdata = last_msg
-    send_at('AT+CSQ','OK',1)
-    send_at('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
-    send_at('AT+HTTPINIT','OK',1)
-    send_at('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field1="','OK',1)
-    send_at('AT+HTTPACTION=0 ','OK',1)
-
-    print("GPS Data: " + gpsdata)
-
-def power_down(power_key):
-	print('SIM7600X is loging off:')
-	#GPIO.output(power_key,GPIO.HIGH)
-	#time.sleep(3)
-	#GPIO.output(power_key,GPIO.LOW)
-	#time.sleep(18)
-	print('Good bye')
-
-try:
-	power_on(power_key)
-	send_gps_position()
-	power_down(power_key)
-except:
-	if ser != None:
-		ser.close()
-	power_down(power_key)
-	GPIO.cleanup()
-if ser != None:
-		ser.close()
-		GPIO.cleanup()
+    def run(self):
+        print('********************************')
+        print('      Starting GPS Update')
+        print('********************************')
+        rec_null = True
+        answer = 0
+        rec_buff = ''
+        self.send_at('AT+CGPS=1,1','OK',1)
+        time.sleep(2)
+        while rec_null:
+            answer = self.send_at('AT+CGPSINFO','+CGPSINFO: ',1)
+            if 1 == answer:
+                answer = 0
+                if ',,,,,,' in rec_buff:
+                    print('GPS is not ready')
+                    rec_null = True
+                    time.sleep(1)
+                else:
+                    #print("GPS OK")
+                    rec_null = False
+            else:
+                #print('error %d'%answer)
+                rec_buff = ''
+                send_at('AT+CGPS=0','OK',1)
+                return False

@@ -302,10 +302,12 @@ while system_run:
             # subtract draw
             amphours_draw_total = amphours_draw_total + sensordata["draw_current"] * (time.time() - lastSensorUpdate)/3600*-1
             amphours_charge_total = amphours_charge_total + sensordata["charge_current"] * (time.time() - lastSensorUpdate)/3600
-            print("amphours_draw_total:" + str(amphours_draw_total))
-            print("amphours_charge_total:" + str(amphours_charge_total))
+            #print("amphours_draw_total:" + str(amphours_draw_total))
+            #print("amphours_charge_total:" + str(amphours_charge_total))
             sensordata["remaining_ahs"] = battery_capacity_ahs - amphours_draw_total + amphours_charge_total
-            sensordata["time_remaining"] = sensordata["remaining_ahs"]/(sensordata["draw_current"]*-1 - sensordata["charge_current"])
+            sensordata["time_remaining"] = round(sensordata["remaining_ahs"]/(sensordata["draw_current"]*-1 - sensordata["charge_current"]))
+            if sensordata["time_remaining"] < 0:
+                sensordata["time_remaining"] = "∞"
 
             if time.time()-amphour_start_time > 60:
                 amphour_start_time = 0

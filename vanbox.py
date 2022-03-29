@@ -20,11 +20,18 @@ sensordata = {}
 sensordata["lat"] = 0
 sensordata["long"] = 0
 
-current_poweroff = 12.38
+current_poweroff = 12.00
 lastLowDetection = 0
 warning_time = 120
 power_off_time = 120
 warned = False
+
+
+amphours_draw_total = 0.0
+amphours_draw_current = 0.0
+amphours_charge_total = 0.0
+amphours_charge_current = 0.0
+battery_capacity_ahs = 0
 
 modem_busy = False
 
@@ -36,6 +43,7 @@ gps_update_delay = 600
 lastSensorUpdate = 0
 sensor_update_delay = 1
 lastToggle = 0
+amphour_start_time = 0
 
 # LED
 dimmer = "b'100'"
@@ -49,11 +57,11 @@ RELAIS_3_GPIO = 13
 GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)
 GPIO.output(RELAIS_1_GPIO, 1)
 GPIO.setup(RELAIS_2_GPIO, GPIO.OUT)
-GPIO.output(RELAIS_1_GPIO, 1)
+GPIO.output(RELAIS_2_GPIO, 1)
 GPIO.setup(RELAIS_3_GPIO, GPIO.OUT)
-GPIO.output(RELAIS_1_GPIO, 1)
+GPIO.output(RELAIS_3_GPIO, 1)
 GPIO.setup(RELAIS_4_GPIO, GPIO.OUT)
-GPIO.output(RELAIS_1_GPIO, 1)
+GPIO.output(RELAIS_4_GPIO, 1)
 
 # Taster
 GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -176,6 +184,8 @@ def publish_to_mqtt():
         client.publish("snowball/sensor/battery_charge_power", sensordata["charge_power"])
         client.publish("snowball/sensor/accelerometer_x",sensordata["acc_x"])
         client.publish("snowball/sensor/accelerometer_y",sensordata["acc_y"])
+        client.publish("snowball/sensor/remaining_ahs",sensordata["remaining_ahs"])
+        client.publish("snowball/sensor/time_remaining",sensordata["time_remaining"])
         client.publish("snowball/position/lat_long", str(sensordata["lat"]) + "," + str(sensordata["long"]) + ",0.0000000,0.0")
         #print("Data sent to MQTT broker")
     except:
@@ -281,6 +291,26 @@ while system_run:
             print("")
 
     if lastSensorUpdate == 0 or time.time() - lastSensorUpdate >= sensor_update_delay:
+        if lastSensorUpdate > 1:
+            if battery_capacity_ahs == 0:
+                print(str(sensordata["draw_voltage"]))
+                battery_capacity_ahs = 45 / 100 * ((sensordata["draw_voltage"] - 12) / 0.7 * 100)
+                print("Errechnete Batteriekapazitaet: " +  str(battery_capacity_ahs))
+
+            if amphour_start_time == 0:
+                amphour_start_time = time.time()
+            # subtract draw
+            amphours_draw_total = amphours_draw_total + sensordata["draw_current"] * (time.time() - lastSensorUpdate)/3600*-1
+            amphours_charge_total = amphours_charge_total + sensordata["charge_current"] * (time.time() - lastSensorUpdate)/3600
+            print("amphours_draw_total:" + str(amphours_draw_total))
+            print("amphours_charge_total:" + str(amphours_charge_total))
+            sensordata["remaining_ahs"] = battery_capacity_ahs - amphours_draw_total + amphours_charge_total
+            sensordata["time_remaining"] = sensordata["remaining_ahs"]/(sensordata["draw_current"]*-1 - sensordata["charge_current"])
+
+            if time.time()-amphour_start_time > 60:
+                amphour_start_time = 0
+                amphours_draw_total = 0
+
         #print (json.dumps(sensordata, indent=2))
         sensor_thread = mgr.new_sensor_thread()
         sensor_thread.start()

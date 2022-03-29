@@ -26,6 +26,7 @@ lastToggle = 0
 
 # LED
 ledcontrol = LedControl()
+dimmer = "b'100'"
 
 # _GPIO
 GPIO.setmode(GPIO.BCM)
@@ -59,11 +60,13 @@ def on_connect(client, userdata, flags, rc):
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
+    global dimmer
     print("Received Message: " + msg.topic+" "+str(msg.payload))
     if msg.topic == 'snowball/light/set_color':
         ledcontrol.setLightColor(str(msg.payload)[3:9])
     elif msg.topic == 'snowball/light/dimmer':
-        ledcontrol.setLightDimmer(str(msg.payload))
+        dimmer = str(msg.payload)
+        ledcontrol.setLightDimmer(dimmer)
     elif msg.topic == 'snowball/light/effect/rainbow':
         ledcontrol.rainbow_cycle(0.001)
     elif msg.topic == 'snowball/switch/1':
@@ -75,6 +78,8 @@ def on_message(client, userdata, msg):
     elif msg.topic == 'snowball/switch/4':
         toggleSwitch(msg.topic[-1], msg.payload)
     elif msg.topic == '$SYS/broker/clients/active':
+        dimmer_value = str(re.findall(r"'(.*?)'", dimmer)[0])
+        client.publish("snowball/light/dimmer", dimmer_value)
         if GPIO.input(RELAIS_1_GPIO) == GPIO.LOW:
             client.publish("snowball/switch/1","off")
         else:
@@ -98,11 +103,15 @@ def on_message(client, userdata, msg):
 def toggleSwitch(switch, value):
     new_value = re.findall(r"'(.*?)'", str(value))[0]
     if new_value == "on":
-        print("switch Light on")
+        print("switch " + switch + " on")
         GPIO.output(eval("RELAIS_"+switch+"_GPIO"), GPIO.HIGH) # an
+        if switch == "2":
+            client.publish("snowball/light/dimmer", "100")
     else:
-        print("switch Light off")
+        print("switch " + switch + " off")
         GPIO.output(eval("RELAIS_"+switch+"_GPIO"), GPIO.LOW) # an
+        if switch == "2":
+            client.publish("snowball/light/dimmer", "0")
 
 def toggle_LEDs():
     if GPIO.input(RELAIS_2_GPIO) == GPIO.HIGH:

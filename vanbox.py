@@ -1,22 +1,10 @@
 import RPi.GPIO as GPIO
-
 import time
-import adafruit_ahtx0
-import Adafruit_DHT
 import board
 import logging
-import board
-
 import re
 import paho.mqtt.client as mqtt
-
-
 import json
-
-from ina219 import INA219
-from ina219 import DeviceRangeError
-from pigpio_dht import DHT11, DHT22
-from mpu6050 import mpu6050
 from threading import Thread
 from gps import UpdateGPS
 from cloud import UpdateThingspeak
@@ -24,7 +12,6 @@ from sensors import *
 from led import LedControl
 
 sensordata = {}
-
 sensordata["lat"] = 0
 sensordata["long"] = 0
 
@@ -37,26 +24,11 @@ lastSensorUpdate = 0
 sensor_update_delay = 1
 lastToggle = 0
 
-# Sensors
-indoorTempSensor = adafruit_ahtx0.AHTx0(board.I2C())
-mpu = mpu6050(0x68)
-
-SHUNT_OHMS = 0.0015
-MAX_EXPECTED_AMPS = 50
-
-ina_draw = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, address=0x44)
-ina_charge = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, address=0x40)
-ina_draw.configure(ina_draw.RANGE_16V, ina_draw.GAIN_2_80MV)
-ina_charge.configure(ina_charge.RANGE_16V, ina_charge.GAIN_2_80MV)
-
-
 # LED
 ledcontrol = LedControl()
 
-
 # _GPIO
 GPIO.setmode(GPIO.BCM)
-
 RELAIS_1_GPIO = 5
 RELAIS_2_GPIO = 6
 RELAIS_4_GPIO = 19
@@ -69,31 +41,12 @@ GPIO.setup(RELAIS_4_GPIO, GPIO.OUT)
 # Taster
 GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 
-def get_smoothed_values(n_samples=10):
-    """
-    Get smoothed values from the sensor by sampling
-    the sensor `n_samples` times and returning the mean.
-    """
-    result = {}
-    for _ in range(n_samples):
-        data = mpu.get_accel_data()
-
-        for k in data.keys():
-            # Add on value / n_samples (to generate an average)
-            # with default of 0 for first loop.
-            result[k] = result.get(k, 0) + (data[k] / n_samples)
-    sensordata["acc_x"] = str((result['x']-0.3)*100+50)
-    sensordata["acc_y"] = str((result['y']+0.35)*100+50)
-    #return result
-
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
     print("Connected to Broker with result code "+str(rc))
     print('')
     print('')
 
-    # Subscribing in on_connect() means that if we lose the connection and
-    # reconnect then subscriptions will be renewed.
     client.subscribe("$SYS/broker/clients/active")
     client.subscribe("snowball/light/set_color")
     client.subscribe("snowball/light/dimmer")
@@ -159,7 +112,6 @@ def toggle_LEDs():
         GPIO.output(RELAIS_2_GPIO, GPIO.HIGH) # an
         client.publish("snowball/switch/2","on")
 
-
 print('')
 print('********************************')
 print('     VANBOX is starting up....')
@@ -168,8 +120,6 @@ print('')
 print('[press ctrl+c to end the Program]')
 print('')
 print('')
-
-
 print("Connecting to MQTT Broker...")
 client = mqtt.Client("Pi") #create new instance
 client.connect("127.0.0.1", 1883, 60)
@@ -177,61 +127,8 @@ client.on_connect = on_connect
 client.on_message = on_message
 client.loop_start()
 
-
-def gps_callback(lat, long):
-    print("arrived at callback")
-
-
-class Manager(object):
-    def new_gps_thread(self):
-        return UpdateGPS(parent=self)
-    def on_thread_finished(self, thread, data):
-        sensordata["lat"] = data["lat"]
-        sensordata["long"] = data["long"]
-        #print(data)
-
-
-lastSensorUpdate = time.time()
-
-
-mgr = Manager()
-
-
-while True:
-
-    if GPIO.input(20) == GPIO.HIGH:
-        if lastToggle == 0 or time.time() - lastToggle >= 1:
-            lastToggle = time.time()
-            toggle_LEDs()
-
-    if lastSensorUpdate == 0 or time.time() - lastSensorUpdate >= sensor_update_delay:
-        sensordata["draw_voltage"] = ina_draw.voltage()
-        try:
-            sensordata["draw_current"] = ina_draw.current()/1000
-            sensordata["draw_power"] = (ina_draw.power()/1000) * -1
-        except DeviceRangeError as e:
-            print("Draw Current overflow")
-
-        sensordata["charge_voltage"] = ina_charge.voltage()
-        try:
-            sensordata["charge_current"] = ina_charge.current()/1000
-            sensordata["charge_power"] = ina_charge.power()/1000
-        except DeviceRangeError as e:
-            print("Charge Current overflow")
-
-
-        sensordata["temp_inside"] = indoorTempSensor.temperature
-        sensordata["humid_inside"] = indoorTempSensor.relative_humidity
-
-        try:
-            humidity, temperature = Adafruit_DHT.read_retry(22, 12)
-            sensordata["temp_outside"] = temperature
-            sensordata["humid_outside"] = humidity
-        except DeviceRangeError as e:
-            print("Error getting outside temperature")
-
-        get_smoothed_values()
-
+def publish_to_mqtt():
+    try:
         # SEND IT - to MQTT
         client.publish("snowball/sensor/temp_inside",sensordata["temp_inside"])
         client.publish("snowball/sensor/humidity_inside",sensordata["humid_inside"])
@@ -246,8 +143,47 @@ while True:
         client.publish("snowball/sensor/accelerometer_x",sensordata["acc_x"])
         client.publish("snowball/sensor/accelerometer_y",sensordata["acc_y"])
         client.publish("snowball/position/lat_long", str(sensordata["lat"]) + "," + str(sensordata["long"]) + ",0.0000000,0.0")
+        #print("Data sent to MQTT broker")
+    except:
+        print("Error posting to mqtt")
 
-        #print (json.dumps(sensordata, indent=2))
+class Manager(object):
+    def new_gps_thread(self):
+        return UpdateGPS(parent=self)
+    def on_gps_thread_finished(self, thread, data):
+        sensordata["lat"] = data["lat"]
+        sensordata["long"] = data["long"]
+
+    def new_sensor_thread(self):
+        return UpdateSensors(parent=self)
+    def on_sensor_thread_finished(self, thread, data):
+        #print (json.dumps(data, indent=2))
+        sensordata["acc_x"] = data["acc_x"]
+        sensordata["acc_y"] = data["acc_y"]
+        sensordata["draw_voltage"] = data["draw_voltage"]
+        sensordata["draw_current"] = data["draw_current"]
+        sensordata["draw_power"] = data["draw_power"]
+        sensordata["charge_voltage"] = data["charge_voltage"]
+        sensordata["charge_current"] = data["charge_current"]
+        sensordata["charge_power"] = data["charge_power"]
+        sensordata["temp_inside"] = data["temp_inside"]
+        sensordata["humid_inside"] = data["humid_inside"]
+        sensordata["temp_outside"] = data["temp_outside"]
+        sensordata["humid_outside"] = data["humid_outside"]
+
+mgr = Manager()
+
+while True:
+    if GPIO.input(20) == GPIO.HIGH:
+        if lastToggle == 0 or time.time() - lastToggle >= 1:
+            lastToggle = time.time()
+            toggle_LEDs()
+
+    if lastSensorUpdate == 0 or time.time() - lastSensorUpdate >= sensor_update_delay:
+        sensor_thread = mgr.new_sensor_thread()
+        sensor_thread.start()
+        publish_to_mqtt()
+        lastSensorUpdate = time.time()
 
     # Update thingspeak?
     if lastCloudUpdate == 0 or time.time() - lastCloudUpdate >= cloud_update_delay:
@@ -258,11 +194,6 @@ while True:
 
     # Update GPS Position?
     if lastGPSUpdate == 0 or time.time() - lastGPSUpdate >= gps_update_delay:
-        thread = mgr.new_gps_thread()
-        thread.start()
+        gps_thread = mgr.new_gps_thread()
+        gps_thread.start()
         lastGPSUpdate = time.time()
-
-
-
-
-    #time.sleep(0.1)

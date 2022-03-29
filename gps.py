@@ -2,8 +2,6 @@ import serial
 import time
 import threading
 
-
-
 #SIM & GPS Module
 sim_serial = serial.Serial('/dev/ttyUSB3',115200)
 
@@ -81,7 +79,7 @@ class UpdateGPS(threading.Thread):
                     time.sleep(1)
                 else:
                     #print("GPS OK")
-                    self.parent and self.parent.on_thread_finished(self, sensordata)
+                    self.parent and self.parent.on_gps_thread_finished(self, sensordata)
                     rec_null = False
             else:
                 #print('error %d'%answer)

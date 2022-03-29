@@ -67,10 +67,12 @@ class UpdateGPS(threading.Thread):
                 return 0
 
     def run(self):
+        global sensordata
+        print('')
         print('********************************')
         print('      Starting GPS Update')
         print('********************************')
-        global sensordata
+        print('')
         rec_null = True
         answer = 0
         rec_buff = ''
@@ -86,8 +88,11 @@ class UpdateGPS(threading.Thread):
                     time.sleep(1)
                 else:
                     #print("GPS OK")
+                    sim_serial.close()
+                    self.terminate()
                     self.parent and self.parent.on_gps_thread_finished(self, sensordata)
                     rec_null = False
+                    self.terminate()
             else:
                 #print('error %d'%answer)
                 rec_buff = ''

@@ -83,5 +83,6 @@ class UpdateSensors(threading.Thread):
             print("Error getting outside temperature")
 
         self.get_smoothed_values()
-        
+
         self.parent and self.parent.on_sensor_thread_finished(self, sensordata)
+        self.terminate()

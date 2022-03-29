@@ -1253,4 +1253,297 @@ switch Light off
 ********************************
 ********************************
          GPS Error
+********************************Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/threading.py", line 954, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.9/threading.py", line 892, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/pi/SmartVanIoT/cloud.py", line 27, in run
+    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field1=" + str(sensordata["humid_inside"]))
+KeyError: 'humid_inside'
+
 ********************************
+     VANBOX is starting up....
+********************************
+
+[press ctrl+c to end the Program]
+
+
+Connecting to MQTT Broker...
+Connected to Broker with result code 0
+
+
+Error posting to mqtt
+********************************
+     Starting Cloud Update
+********************************
+
+
+********************************
+      Starting GPS Update
+********************************
+AT+CGPSINFO
++CGPSINFO: 4804.513004,N,01114.891553,E,290322,101338.0,601.2,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.513004,N,01114.891553,E,290322,101338.0,601.2,0.0,
+
+OK
+
+
+
+Received Message: $SYS/broker/clients/active b'3'
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/1 b'on'
+switch 1 on
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/switch/3 b'on'
+switch 3 on
+Received Message: snowball/switch/4 b'off'
+switch 4 off
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/light/dimmer b'46'
+Received Message: snowball/light/set_color b'#4169e0'
+Received Message: snowball/light/set_color b'#00ffff'
+Received Message: snowball/light/dimmer b'14'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/light/set_color b'#ffa44f'
+Received Message: snowball/light/dimmer b'24'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/light/set_color b'#ffffff'
+Received Message: snowball/light/dimmer b'63'
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/1 b'off'
+switch 1 off
+Received Message: snowball/switch/1 b'on'
+switch 1 on
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/light/dimmer b'99'
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: $SYS/broker/clients/active b'2'
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/1 b'on'
+switch 1 on
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/switch/3 b'on'
+switch 3 on
+Received Message: snowball/switch/4 b'off'
+switch 4 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: $SYS/broker/clients/active b'3'
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/1 b'on'
+switch 1 on
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/switch/3 b'on'
+switch 3 on
+Received Message: snowball/switch/4 b'off'
+switch 4 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: $SYS/broker/clients/active b'2'
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/1 b'on'
+switch 1 on
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/switch/3 b'on'
+switch 3 on
+Received Message: snowball/switch/4 b'off'
+switch 4 off
+Received Message: snowball/light/dimmer b'100'
+Received Message: $SYS/broker/clients/active b'3'
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/1 b'on'
+switch 1 on
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/switch/3 b'on'
+switch 3 on
+Received Message: snowball/switch/4 b'off'
+switch 4 off
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/light/set_color b'#ffffff'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: $SYS/broker/clients/active b'2'
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/1 b'on'
+switch 1 on
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/switch/3 b'on'
+switch 3 on
+Received Message: snowball/switch/4 b'off'
+switch 4 off
+Received Message: snowball/light/dimmer b'0'
+********************************
+      Starting GPS Update
+********************************
+AT+CGPSINFO
++CGPSINFO: 4804.512975,N,01114.891674,E,290322,102338.0,601.3,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.512975,N,01114.891674,E,290322,102338.0,601.3,0.0,
+
+OK
+
+
+
+********************************
+      Starting GPS Update
+********************************
+AT+CGPSINFO
++CGPSINFO: 4804.512846,N,01114.891469,E,290322,103339.0,601.3,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.512846,N,01114.891469,E,290322,103339.0,601.3,0.0,
+
+OK
+
+
+
+********************************
+      Starting GPS Update
+********************************
+AT+CGPSINFO
++CGPSINFO: 4804.512660,N,01114.891602,E,290322,104339.0,600.8,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.512660,N,01114.891602,E,290322,104339.0,600.8,0.0,
+
+OK
+
+
+
+Received Message: $SYS/broker/clients/active b'3'
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/1 b'on'
+switch 1 on
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/switch/3 b'on'
+switch 3 on
+Received Message: snowball/switch/4 b'off'
+switch 4 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/light/dimmer b'34'
+Received Message: snowball/light/set_color b'#ffa44f'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/2 b'on'
+switch 2 on
+Received Message: snowball/light/dimmer b'100'
+Received Message: snowball/switch/2 b'off'
+switch 2 off
+Received Message: snowball/light/dimmer b'0'
+Received Message: $SYS/broker/clients/active b'2'
+Received Message: snowball/light/dimmer b'0'
+Received Message: snowball/switch/1 b'on'
+switch 1 on
+Received Message: snowball/switch/2 b'off'

@@ -6,6 +6,7 @@ import threading
 sim_serial = serial.Serial('/dev/ttyUSB3',115200)
 
 sensordata = {}
+error_counter = 0
 
 class UpdateGPS(threading.Thread):
     def __init__(self, parent=None):
@@ -23,9 +24,13 @@ class UpdateGPS(threading.Thread):
 
     def send_at(self,command,back,timeout):
         global sensordata
+        global error_counter
         rec_buff = ''
         sim_serial.write((command+'\r\n').encode())
         time.sleep(timeout)
+        if error_counter == 5:
+            error_counter = 0
+            return 1
         if sim_serial.inWaiting():
             time.sleep(0.01 )
             rec_buff = sim_serial.read(sim_serial.inWaiting())
@@ -48,13 +53,15 @@ class UpdateGPS(threading.Thread):
                         print(last_position)
                         print('')
                         print('')
+                        return 1
                     except:
+                        error_counter = error_counter + 1
                         print('********************************')
                         print('         GPS Error')
                         print('********************************')
                         print('')
                         print('')
-                    return 1
+
             else:
                 print('Modem is not ready')
                 return 0
@@ -84,5 +91,5 @@ class UpdateGPS(threading.Thread):
             else:
                 #print('error %d'%answer)
                 rec_buff = ''
-                send_at('AT+CGPS=0','OK',1)
-                return False
+                self.send_at('AT+CGPS=0','OK',1)
+                #return False

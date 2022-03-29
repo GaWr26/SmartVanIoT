@@ -15,6 +15,8 @@ sensordata = {}
 sensordata["lat"] = 0
 sensordata["long"] = 0
 
+modem_busy = False
+
 # Delays and times
 lastCloudUpdate = 0
 cloud_update_delay = 3600
@@ -40,9 +42,11 @@ GPIO.setup(RELAIS_3_GPIO, GPIO.OUT)
 GPIO.setup(RELAIS_4_GPIO, GPIO.OUT)
 
 # Taster
-GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
+GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-# The callback for when the client receives a CONNACK response from the server.
+
+
+
 def on_connect(client, userdata, flags, rc):
     print("Connected to Broker with result code "+str(rc))
     print('')
@@ -61,6 +65,7 @@ def on_connect(client, userdata, flags, rc):
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     global dimmer
+    dimmer_value = str(re.findall(r"'(.*?)'", dimmer)[0])
     print("Received Message: " + msg.topic+" "+str(msg.payload))
     if msg.topic == 'snowball/light/set_color':
         ledcontrol.setLightColor(str(msg.payload)[3:9])
@@ -78,7 +83,6 @@ def on_message(client, userdata, msg):
     elif msg.topic == 'snowball/switch/4':
         toggleSwitch(msg.topic[-1], msg.payload)
     elif msg.topic == '$SYS/broker/clients/active':
-        dimmer_value = str(re.findall(r"'(.*?)'", dimmer)[0])
         client.publish("snowball/light/dimmer", dimmer_value)
         if GPIO.input(RELAIS_1_GPIO) == GPIO.LOW:
             client.publish("snowball/switch/1","off")
@@ -101,14 +105,14 @@ def on_message(client, userdata, msg):
             client.publish("snowball/switch/4","on")
 
 def toggleSwitch(switch, value):
+    global dimmer
+    dimmer_value = str(re.findall(r"'(.*?)'", dimmer)[0])
     new_value = re.findall(r"'(.*?)'", str(value))[0]
     if new_value == "on":
-        print("switch " + switch + " on")
         GPIO.output(eval("RELAIS_"+switch+"_GPIO"), GPIO.HIGH) # an
         if switch == "2":
-            client.publish("snowball/light/dimmer", "100")
+            client.publish("snowball/light/dimmer", dimmer_value)
     else:
-        print("switch " + switch + " off")
         GPIO.output(eval("RELAIS_"+switch+"_GPIO"), GPIO.LOW) # an
         if switch == "2":
             client.publish("snowball/light/dimmer", "0")
@@ -157,16 +161,25 @@ def publish_to_mqtt():
         print("Error posting to mqtt")
 
 class Manager(object):
+    global sensordata
+
     def new_gps_thread(self):
         return UpdateGPS(parent=self)
     def on_gps_thread_finished(self, thread, data):
+        global modem_busy
         sensordata["lat"] = data["lat"]
         sensordata["long"] = data["long"]
+        modem_busy = False
+
+    def new_cloud_update_thread(self):
+        return UpdateThingspeak(sensordata, parent=self)
+    def on_cloud_update_thread_finished(self, thread):
+        global modem_busy
+        modem_busy = False
 
     def new_sensor_thread(self):
         return UpdateSensors(parent=self)
     def on_sensor_thread_finished(self, thread, data):
-        #print (json.dumps(data, indent=2))
         sensordata["acc_x"] = data["acc_x"]
         sensordata["acc_y"] = data["acc_y"]
         sensordata["draw_voltage"] = data["draw_voltage"]
@@ -189,20 +202,24 @@ while True:
             toggle_LEDs()
 
     if lastSensorUpdate == 0 or time.time() - lastSensorUpdate >= sensor_update_delay:
+        #print (json.dumps(sensordata, indent=2))
         sensor_thread = mgr.new_sensor_thread()
         sensor_thread.start()
         publish_to_mqtt()
         lastSensorUpdate = time.time()
 
-    # Update thingspeak?
-    if lastCloudUpdate == 0 or time.time() - lastCloudUpdate >= cloud_update_delay:
-        UpdateCloudClass = UpdateThingspeak(sensordata)
-        UpdateCloudThread = Thread(target=UpdateCloudClass.run)
-        UpdateCloudThread.start()
-        lastCloudUpdate = time.time()
-
     # Update GPS Position?
     if lastGPSUpdate == 0 or time.time() - lastGPSUpdate >= gps_update_delay:
-        gps_thread = mgr.new_gps_thread()
-        gps_thread.start()
-        lastGPSUpdate = time.time()
+        if modem_busy == False:
+            modem_busy = True
+            gps_thread = mgr.new_gps_thread()
+            gps_thread.start()
+            lastGPSUpdate = time.time()
+
+    # Update thingspeak?
+    if lastCloudUpdate == 0 or time.time() - lastCloudUpdate >= cloud_update_delay:
+        if modem_busy == False:
+            modem_busy = True
+            cloud_update_thread = mgr.new_cloud_update_thread()
+            cloud_update_thread.start()
+            lastCloudUpdate = time.time()

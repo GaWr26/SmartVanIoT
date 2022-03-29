@@ -75,12 +75,14 @@ class UpdateThingspeak(threading.Thread):
             time.sleep(20)
             urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field7=" + str(sensordata["long"]))
 
+            print('')
             print('********************************')
             print('  Wifi Cloud Update finished')
             print('********************************')
             print('')
             print('')
         else:
+            print('')
             print('********************************')
             print(' Starting Cloud Update via SIM')
             print('********************************')
@@ -132,5 +134,6 @@ class UpdateThingspeak(threading.Thread):
             print('********************************')
             print('')
             print('')
+        sim_serial.close()
         self.parent and self.parent.on_cloud_update_thread_finished(self)
         self.terminate()

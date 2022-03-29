@@ -2,6 +2,7 @@ import neopixel
 import board
 import re
 import time
+import threading
 
 
 pixel_pin = board.D21
@@ -19,9 +20,15 @@ last_color = [255, 255, 255]
 
 loopEffect = False
 
-class LedControl:
-    def __init__(self):
-        self._running = True
+class LED(threading.Thread):
+    def __init__(self, parent=None):
+        self.parent = parent
+        super(LED, self).__init__()
+
+    def target_with_callback(self):
+        self.method()
+        if self.callback is not None:
+            self.callback(*self.callback_args)
 
     def terminate(self):
         self._running = False

@@ -11,7 +11,7 @@ from subprocess import call
 from gps import UpdateGPS
 from cloud import UpdateThingspeak
 from sensors import *
-from led import LedControl
+from led import LED
 from sms import SMS
 
 system_run = True
@@ -38,7 +38,6 @@ sensor_update_delay = 1
 lastToggle = 0
 
 # LED
-ledcontrol = LedControl()
 dimmer = "b'100'"
 
 # _GPIO
@@ -91,7 +90,7 @@ def on_message(client, userdata, msg):
         dimmer = str(msg.payload)
         ledcontrol.setLightDimmer(dimmer)
     elif msg.topic == 'snowball/light/effect/rainbow':
-        ledcontrol.rainbow_cycle(0.001)
+        ledcontrol.rainbow_cycle(0.01)
     elif msg.topic == 'snowball/switch/1':
         toggleSwitch(msg.topic[-1], msg.payload)
     elif msg.topic == 'snowball/switch/2':
@@ -203,6 +202,9 @@ class Manager(object):
         global modem_busy
         modem_busy = False
 
+    def new_led_thread(self):
+        return LED(parent=self)
+
     def new_cloud_update_thread(self):
         return UpdateThingspeak(sensordata, parent=self)
     def on_cloud_update_thread_finished(self, thread):
@@ -226,6 +228,9 @@ class Manager(object):
         sensordata["humid_outside"] = data["humid_outside"]
 
 mgr = Manager()
+
+ledcontrol = mgr.new_led_thread()
+ledcontrol.start()
 
 while system_run:
     if GPIO.input(20) == GPIO.HIGH:

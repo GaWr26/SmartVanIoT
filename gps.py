@@ -89,7 +89,6 @@ class UpdateGPS(threading.Thread):
                 else:
                     #print("GPS OK")
                     sim_serial.close()
-                    self.terminate()
                     self.parent and self.parent.on_gps_thread_finished(self, sensordata)
                     rec_null = False
                     self.terminate()

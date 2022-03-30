@@ -32,6 +32,8 @@ amphours_draw_current = 0.0
 amphours_charge_total = 0.0
 amphours_charge_current = 0.0
 battery_capacity_ahs = 0
+battery_set_ahs = 45
+skip_first = 0
 
 modem_busy = False
 
@@ -85,6 +87,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("snowball/switch/3")
     client.subscribe("snowball/switch/4")
     client.subscribe("snowball/light/effect/rainbow")
+    client.subscribe("snowball/sensor/calibrate_battery")
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
@@ -107,6 +110,11 @@ def on_message(client, userdata, msg):
         toggleSwitch(msg.topic[-1], msg.payload)
     elif msg.topic == 'snowball/switch/4':
         toggleSwitch(msg.topic[-1], msg.payload)
+    elif msg.topic == 'snowball/sensor/calibrate_battery':
+        battery_capacity_ahs = battery_set_ahs
+        amphour_start_time = 0
+        amphours_charge_total = 0.0
+        amphours_draw_total = 0.0
     elif msg.topic == '$SYS/broker/clients/active':
         # check if # clients has increased.
         active_client_count = active_clients
@@ -292,27 +300,36 @@ while system_run:
 
     if lastSensorUpdate == 0 or time.time() - lastSensorUpdate >= sensor_update_delay:
         if lastSensorUpdate > 1:
-            if battery_capacity_ahs == 0:
-                print(str(sensordata["draw_voltage"]))
-                battery_capacity_ahs = 45 / 100 * ((sensordata["draw_voltage"] - 12) / 0.7 * 100)
-                print("Errechnete Batteriekapazitaet: " +  str(battery_capacity_ahs))
+            if skip_first >= 5:
+                if battery_capacity_ahs == 0:
+                    print(str(sensordata["draw_voltage"]))
+                    battery_capacity_ahs = battery_set_ahs / 100 * ((sensordata["draw_voltage"] - 12) / 0.7 * 100)
+                    print("Errechnete Batteriekapazitaet: " +  str(battery_capacity_ahs))
 
-            if amphour_start_time == 0:
-                amphour_start_time = time.time()
-            # subtract draw
-            amphours_draw_total = amphours_draw_total + sensordata["draw_current"] * (time.time() - lastSensorUpdate)/3600*-1
-            amphours_charge_total = amphours_charge_total + sensordata["charge_current"] * (time.time() - lastSensorUpdate)/3600
-            #print("amphours_draw_total:" + str(amphours_draw_total))
-            #print("amphours_charge_total:" + str(amphours_charge_total))
-            sensordata["remaining_ahs"] = battery_capacity_ahs - amphours_draw_total + amphours_charge_total
-            sensordata["time_remaining"] = round(sensordata["remaining_ahs"]/(sensordata["draw_current"]*-1 - sensordata["charge_current"]))
-            if sensordata["time_remaining"] < 0:
-                sensordata["time_remaining"] = "∞"
+                if amphour_start_time == 0:
+                    amphour_start_time = time.time()
 
-            if time.time()-amphour_start_time > 60:
-                amphour_start_time = 0
-                amphours_draw_total = 0
 
+                # subtract draw
+                amphours_draw_total = amphours_draw_total + (sensordata["draw_current"] * (time.time() - lastSensorUpdate)/3600*-1)
+                amphours_draw_total = round(amphours_draw_total,7)
+                amphours_charge_total = amphours_charge_total + (sensordata["charge_current"] * (time.time() - lastSensorUpdate)/3600)
+                amphours_charge_total = round(amphours_charge_total,7)
+                #print('')
+                #print("amphours_draw_total:" + str(amphours_draw_total))
+                #print("amphours_charge_total:" + str(amphours_charge_total))
+                #print('')
+                sensordata["remaining_ahs"] = battery_capacity_ahs - amphours_draw_total + amphours_charge_total
+                if sensordata["remaining_ahs"] > battery_set_ahs:
+                    sensordata["remaining_ahs"] = battery_set_ahs
+                sensordata["time_remaining"] = round(sensordata["remaining_ahs"]/(sensordata["draw_current"]*-1 - sensordata["charge_current"]))
+                if sensordata["time_remaining"] < 0:
+                    sensordata["time_remaining"] = "∞"
+
+                if time.time()-amphour_start_time > 60:
+                    amphour_start_time = 0
+                    amphours_draw_total = 0
+            skip_first = skip_first + 1
         #print (json.dumps(sensordata, indent=2))
         sensor_thread = mgr.new_sensor_thread()
         sensor_thread.start()

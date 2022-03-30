@@ -93,6 +93,10 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     global dimmer
     global active_clients
+    global battery_capacity_ahs
+    global amphour_start_time
+    global amphours_charge_total
+    global amphours_draw_total
     dimmer_value = str(re.findall(r"'(.*?)'", dimmer)[0])
     print("Received Message: " + msg.topic+" "+str(msg.payload))
     if msg.topic == 'snowball/light/set_color':
@@ -111,6 +115,7 @@ def on_message(client, userdata, msg):
     elif msg.topic == 'snowball/switch/4':
         toggleSwitch(msg.topic[-1], msg.payload)
     elif msg.topic == 'snowball/sensor/calibrate_battery':
+        print("Battery now set to fully charged")
         battery_capacity_ahs = battery_set_ahs
         amphour_start_time = 0
         amphours_charge_total = 0.0

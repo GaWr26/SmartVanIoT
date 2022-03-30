@@ -302,7 +302,6 @@ while system_run:
         if lastSensorUpdate > 1:
             if skip_first >= 5:
                 if battery_capacity_ahs == 0:
-                    print(str(sensordata["draw_voltage"]))
                     battery_capacity_ahs = battery_set_ahs / 100 * ((sensordata["draw_voltage"] - 12) / 0.7 * 100)
                     print("Errechnete Batteriekapazitaet: " +  str(battery_capacity_ahs))
 
@@ -312,9 +311,9 @@ while system_run:
 
                 # subtract draw
                 amphours_draw_total = amphours_draw_total + (sensordata["draw_current"] * (time.time() - lastSensorUpdate)/3600*-1)
-                amphours_draw_total = round(amphours_draw_total,7)
+                amphours_draw_total = amphours_draw_total
                 amphours_charge_total = amphours_charge_total + (sensordata["charge_current"] * (time.time() - lastSensorUpdate)/3600)
-                amphours_charge_total = round(amphours_charge_total,7)
+                amphours_charge_total = amphours_charge_total
                 #print('')
                 #print("amphours_draw_total:" + str(amphours_draw_total))
                 #print("amphours_charge_total:" + str(amphours_charge_total))
@@ -326,10 +325,8 @@ while system_run:
                 if sensordata["time_remaining"] < 0:
                     sensordata["time_remaining"] = "∞"
 
-                if time.time()-amphour_start_time > 60:
-                    amphour_start_time = 0
-                    amphours_draw_total = 0
             skip_first = skip_first + 1
+
         #print (json.dumps(sensordata, indent=2))
         sensor_thread = mgr.new_sensor_thread()
         sensor_thread.start()

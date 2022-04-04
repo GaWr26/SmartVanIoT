@@ -134,6 +134,8 @@ class UpdateThingspeak(threading.Thread):
             print('********************************')
             print('')
             print('')
+
+
         sim_serial.close()
         self.parent and self.parent.on_cloud_update_thread_finished(self)
         self.terminate()

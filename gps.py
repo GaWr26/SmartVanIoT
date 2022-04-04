@@ -28,7 +28,8 @@ class UpdateGPS(threading.Thread):
         rec_buff = ''
         sim_serial.write((command+'\r\n').encode())
         time.sleep(timeout)
-        if error_counter == 5:
+        print("Errorcounter: " + str(error_counter))
+        if error_counter >= 5:
             error_counter = 0
             return 1
         if sim_serial.inWaiting():
@@ -61,6 +62,7 @@ class UpdateGPS(threading.Thread):
                         print('********************************')
                         print('')
                         print('')
+                        return 0
 
             else:
                 print('Modem is not ready')
@@ -73,6 +75,9 @@ class UpdateGPS(threading.Thread):
         print('      Starting GPS Update')
         print('********************************')
         print('')
+
+        if sim_serial.isOpen() == False:
+            sim_serial.open()
         rec_null = True
         answer = 0
         rec_buff = ''
@@ -88,12 +93,12 @@ class UpdateGPS(threading.Thread):
                     time.sleep(1)
                 else:
                     #print("GPS OK")
-                    sim_serial.close()
-                    self.parent and self.parent.on_gps_thread_finished(self, sensordata)
                     rec_null = False
-                    self.terminate()
             else:
                 #print('error %d'%answer)
                 rec_buff = ''
                 self.send_at('AT+CGPS=0','OK',1)
                 #return False
+        sim_serial.close()
+        self.parent and self.parent.on_gps_thread_finished(self, sensordata)
+        self.terminate()

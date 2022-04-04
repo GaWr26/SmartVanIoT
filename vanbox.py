@@ -87,7 +87,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("snowball/switch/3")
     client.subscribe("snowball/switch/4")
     client.subscribe("snowball/light/effect/rainbow")
-    client.subscribe("snowball/sensor/calibrate_battery")
+    client.subscribe("snowball/switch/calibrate_capacity")
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
@@ -114,7 +114,7 @@ def on_message(client, userdata, msg):
         toggleSwitch(msg.topic[-1], msg.payload)
     elif msg.topic == 'snowball/switch/4':
         toggleSwitch(msg.topic[-1], msg.payload)
-    elif msg.topic == 'snowball/sensor/calibrate_battery':
+    elif msg.topic == 'snowball/switch/calibrate_capacity':
         print("Battery now set to fully charged")
         battery_capacity_ahs = battery_set_ahs
         amphour_start_time = 0
@@ -324,8 +324,8 @@ while system_run:
                 #print("amphours_charge_total:" + str(amphours_charge_total))
                 #print('')
                 sensordata["remaining_ahs"] = battery_capacity_ahs - amphours_draw_total + amphours_charge_total
-                if sensordata["remaining_ahs"] > battery_set_ahs:
-                    sensordata["remaining_ahs"] = battery_set_ahs
+                #if sensordata["remaining_ahs"] > battery_set_ahs:
+                    #sensordata["remaining_ahs"] = battery_set_ahs
                 sensordata["time_remaining"] = round(sensordata["remaining_ahs"]/(sensordata["draw_current"]*-1 - sensordata["charge_current"]))
                 if sensordata["time_remaining"] < 0:
                     sensordata["time_remaining"] = "∞"

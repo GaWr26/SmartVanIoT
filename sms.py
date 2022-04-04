@@ -4,6 +4,7 @@ import threading
 
 #SIM & GPS Module
 ser = serial.Serial('/dev/ttyUSB3',115200)
+
 phone_number = ""
 text_message = ""
 

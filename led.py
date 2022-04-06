@@ -4,17 +4,42 @@ import re
 import time
 import threading
 
+from adafruit_led_animation.animation.solid import Solid
+from adafruit_led_animation.animation.colorcycle import ColorCycle
+from adafruit_led_animation.animation.blink import Blink
+from adafruit_led_animation.animation.comet import Comet
+from adafruit_led_animation.animation.chase import Chase
+from adafruit_led_animation.animation.pulse import Pulse
+from adafruit_led_animation.sequence import AnimationSequence
+from adafruit_led_animation.color import (
+    PURPLE,
+    WHITE,
+    AMBER,
+    JADE,
+    TEAL,
+    PINK,
+    MAGENTA,
+    ORANGE,
+)
+
 
 pixel_pin = board.D21
-num_pixels = 30
+num_pixels = 300
 dimmer = 100
 
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
-ORDER = neopixel.GRB
+ORDER = neopixel.RGB
 
 pixels = neopixel.NeoPixel(
     pixel_pin, num_pixels, brightness=1, auto_write=False, pixel_order=ORDER
 )
+
+solid = Solid(pixels, color=PINK)
+blink = Blink(pixels, speed=0.5, color=JADE)
+colorcycle = ColorCycle(pixels, speed=0.4, colors=[MAGENTA, ORANGE, TEAL])
+chase = Chase(pixels, speed=0.1, color=WHITE, size=3, spacing=6)
+comet = Comet(pixels, speed=0.01, color=PURPLE, tail_length=10, bounce=True)
+pulse = Pulse(pixels, speed=0.1, color=AMBER, period=3)
 
 last_color = [255, 255, 255]
 
@@ -39,10 +64,7 @@ class LED(threading.Thread):
       for i in (0, 2, 4):
         decimal = int(hex[i:i+2], 16)
         rgb.append(decimal)
-
       return tuple(rgb)
-
-
 
     def setLightColor(self, color_hex):
         global last_color
@@ -55,6 +77,7 @@ class LED(threading.Thread):
         pixels.show()
 
     def setLightDimmer(self, dimmer):
+
         global last_color
         global loopEffect
         loopEffect = False
@@ -62,36 +85,27 @@ class LED(threading.Thread):
         dimmed_color = [int(last_color[0]*new_value), int(last_color[1]*new_value), int(last_color[2]*new_value)]
         pixels.fill(dimmed_color)
         pixels.show()
+        print("set dimmer " + str(new_value) + " " + str(dimmed_color))
 
-    def wheel(self, pos):
-    # Input a value 0 to 255 to get a color value.
-    # The colours are a transition r - g - b - back to r.
-        if pos < 0 or pos > 255:
-            r = g = b = 0
-        elif pos < 85:
-            r = int(pos * 3)
-            g = int(255 - pos * 3)
-            b = 0
-        elif pos < 170:
-            pos -= 85
-            r = int(255 - pos * 3)
-            g = 0
-            b = int(pos * 3)
+
+    def toggleAnimation(self, id, switch):
+        print("toggle Animation: " + str(id) + " " + str(switch))
+        new_value = re.findall(r"'(.*?)'", str(switch))[0]
+        if new_value == "on":
+            animate = True
         else:
-            pos -= 170
-            r = 0
-            g = int(pos * 3)
-            b = int(255 - pos * 3)
-        return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
+            animate = False
 
+        animations = AnimationSequence(
+            solid,
+            blink,
+            colorcycle,
+            chase,
+            comet,
+            pulse,
+            advance_interval=5,
+            auto_clear=True,
+        )
 
-    def rainbow_cycle(self, wait):
-        global loopEffect
-        loopEffect = True
-        while loopEffect:
-            for j in range(255):
-                for i in range(num_pixels):
-                    pixel_index = (i * 256 // num_pixels) + j
-                    pixels[i] = self.wheel(pixel_index & 255)
-                pixels.show()
-                time.sleep(wait)
+        while animate:
+            animations.animate()

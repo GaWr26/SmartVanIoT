@@ -66,8 +66,8 @@ class UpdateSensors(threading.Thread):
 
         sensordata["charge_voltage"] = ina_charge.voltage()
         try:
-            sensordata["charge_current"] = ina_charge.current()/1000
-            sensordata["charge_power"] = ina_charge.power()/1000
+            sensordata["charge_current"] = ina_charge.current()/1000-0.03
+            sensordata["charge_power"] = ina_charge.power()/1000-0.6
         except DeviceRangeError as e:
             print("Charge Current overflow")
 

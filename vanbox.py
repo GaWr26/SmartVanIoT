@@ -82,6 +82,10 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("snowball/light/set_color")
     client.subscribe("snowball/light/dimmer")
     client.subscribe("snowball/light/dimmer")
+    client.subscribe("snowball/light/effect/1")
+    client.subscribe("snowball/light/effect/2")
+    client.subscribe("snowball/light/effect/3")
+    client.subscribe("snowball/light/effect/4")
     client.subscribe("snowball/switch/1")
     client.subscribe("snowball/switch/2")
     client.subscribe("snowball/switch/3")
@@ -114,6 +118,15 @@ def on_message(client, userdata, msg):
         toggleSwitch(msg.topic[-1], msg.payload)
     elif msg.topic == 'snowball/switch/4':
         toggleSwitch(msg.topic[-1], msg.payload)
+
+    elif msg.topic == 'snowball/light/effect/1':
+        ledcontrol.toggleAnimation(msg.topic[-1], msg.payload)
+    elif msg.topic == 'snowball/light/effect/2':
+        ledcontrol.toggleAnimation(msg.topic[-1], msg.payload)
+    elif msg.topic == 'snowball/light/effect/3':
+        ledcontrol.toggleAnimation(msg.topic[-1], msg.payload)
+    elif msg.topic == 'snowball/light/effect/4':
+        ledcontrol.toggleAnimation(msg.topic[-1], msg.payload)
     elif msg.topic == 'snowball/switch/calibrate_capacity':
         print("Battery now set to fully charged")
         battery_capacity_ahs = battery_set_ahs
@@ -152,10 +165,12 @@ def toggleSwitch(switch, value):
     dimmer_value = str(re.findall(r"'(.*?)'", dimmer)[0])
     new_value = re.findall(r"'(.*?)'", str(value))[0]
     if new_value == "on":
-        if switch == "2":
-            client.publish("snowball/light/dimmer", dimmer_value)
         GPIO.output(eval("RELAIS_"+switch+"_GPIO"), GPIO.LOW) # an
-
+        if switch == "2":
+            print("LEDS on")
+            client.publish("snowball/light/dimmer", dimmer_value)
+            #time.sleep(3)
+            client.publish("snowball/light/dimmer", dimmer_value)
     else:
         GPIO.output(eval("RELAIS_"+switch+"_GPIO"), GPIO.HIGH) # an
 

@@ -43,15 +43,18 @@ class UpdateSensors(threading.Thread):
         """
         global sensordata
         result = {}
-        for _ in range(n_samples):
-            data = mpu.get_accel_data()
+        try:
+            for _ in range(n_samples):
+                data = mpu.get_accel_data()
 
-            for k in data.keys():
-                # Add on value / n_samples (to generate an average)
-                # with default of 0 for first loop.
-                result[k] = result.get(k, 0) + (data[k] / n_samples)
-        sensordata["acc_x"] = str((result['x']-0.3)*100+50)
-        sensordata["acc_y"] = str((result['y']+0.35)*100+50)
+                for k in data.keys():
+                    # Add on value / n_samples (to generate an average)
+                    # with default of 0 for first loop.
+                    result[k] = result.get(k, 0) + (data[k] / n_samples)
+            sensordata["acc_x"] = str((result['x']-0.3)*100+50)
+            sensordata["acc_y"] = str((result['y']+0.35)*100+50)
+        except:
+            print("Error smoothing Accelerometer data")
         #return result
 
 
@@ -71,10 +74,11 @@ class UpdateSensors(threading.Thread):
         except DeviceRangeError as e:
             print("Charge Current overflow")
 
-
-        sensordata["temp_inside"] = indoorTempSensor.temperature
-        sensordata["humid_inside"] = indoorTempSensor.relative_humidity
-
+        try:
+            sensordata["temp_inside"] = indoorTempSensor.temperature
+            sensordata["humid_inside"] = indoorTempSensor.relative_humidity
+        except:
+            print("Error reading indoor Temp sensor")
         try:
             humidity, temperature = Adafruit_DHT.read_retry(22, 12)
             sensordata["temp_outside"] = temperature

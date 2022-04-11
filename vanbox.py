@@ -39,7 +39,7 @@ modem_busy = False
 
 # Delays and times
 lastCloudUpdate = 0
-cloud_update_delay = 3600
+cloud_update_delay = 1800
 lastGPSUpdate = 0
 gps_update_delay = 600
 lastSensorUpdate = 0
@@ -57,13 +57,13 @@ RELAIS_2_GPIO = 6
 RELAIS_4_GPIO = 19
 RELAIS_3_GPIO = 13
 GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)
-GPIO.output(RELAIS_1_GPIO, 1)
+GPIO.output(RELAIS_1_GPIO, 0)
 GPIO.setup(RELAIS_2_GPIO, GPIO.OUT)
 GPIO.output(RELAIS_2_GPIO, 1)
 GPIO.setup(RELAIS_3_GPIO, GPIO.OUT)
-GPIO.output(RELAIS_3_GPIO, 1)
+GPIO.output(RELAIS_3_GPIO, 0)
 GPIO.setup(RELAIS_4_GPIO, GPIO.OUT)
-GPIO.output(RELAIS_4_GPIO, 1)
+GPIO.output(RELAIS_4_GPIO, 0)
 
 # Taster
 GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -339,8 +339,8 @@ while system_run:
                 #print("amphours_charge_total:" + str(amphours_charge_total))
                 #print('')
                 sensordata["remaining_ahs"] = battery_capacity_ahs - amphours_draw_total + amphours_charge_total
-                #if sensordata["remaining_ahs"] > battery_set_ahs:
-                    #sensordata["remaining_ahs"] = battery_set_ahs
+                if sensordata["remaining_ahs"] > battery_set_ahs:
+                    sensordata["remaining_ahs"] = battery_set_ahs
                 sensordata["time_remaining"] = round(sensordata["remaining_ahs"]/(sensordata["draw_current"]*-1 - sensordata["charge_current"]))
                 if sensordata["time_remaining"] < 0:
                     sensordata["time_remaining"] = "∞"

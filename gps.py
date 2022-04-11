@@ -29,7 +29,7 @@ class UpdateGPS(threading.Thread):
         sim_serial.write((command+'\r\n').encode())
         time.sleep(timeout)
         print("Errorcounter: " + str(error_counter))
-        if error_counter >= 5:
+        if error_counter >= 10:
             error_counter = 0
             return 1
         if sim_serial.inWaiting():
@@ -44,8 +44,20 @@ class UpdateGPS(threading.Thread):
                     last_position = rec_buff.decode()
                     print(last_position)
                     try:
-                        sensordata["lat"] = float(last_position[25:36])/100
-                        sensordata["long"] = float(last_position[39:51])/100
+                        #sensordata["lat"] = float(last_position[25:36])#/100
+                        #sensordata["long"] = float(last_position[39:51])#/100
+                        lat = float(last_position[25:36])#/100
+                        long = float(last_position[39:51])#/100
+
+                        #So as latitude is in format DDMM.MMMMM
+                        DDLat = int(float(lat)/100)
+                        MMLat = float(lat) - DDLat * 100
+                        sensordata["lat"] = DDLat + MMLat/60
+
+                        DDLong = int(float(long)/100)
+                        MMLong = float(long) - DDLong * 100
+                        sensordata["long"] = DDLong + MMLong/60 
+
                         print('********************************')
                         print('         GPS Success')
                         print('********************************')

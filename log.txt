@@ -828,3 +828,5692 @@ OK
 ********************************
 
 
+Errorcounter: 4
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+not able to parse GPS Data
+
+********************************
+ Starting Cloud Update via SIM
+********************************
+
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+********************************
+   SIM Cloud Update finished
+********************************
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+AT+CGPS=1,1
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPS=0
+OK
+
++CGPS: 0
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+Errorcounter: 0
+AT+CGPS=0
+OK
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+
+********************************
+     VANBOX is starting up....
+********************************
+
+[press ctrl+c to end the Program]
+
+
+Connecting to MQTT Broker...
+Connected to Broker
+
+retry mqtt publish
+
+********************************
+      Starting GPS Update
+********************************
+
+Received Message: $SYS/broker/clients/active b'0'
+Received Message: $SYS/broker/clients/active b'1'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+Errorcounter: 0
+AT+CGPS=1,1
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+retry mqtt publish
+retry mqtt publish
+retry mqtt publish
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+retry mqtt publish
+Errorcounter: 2
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+retry mqtt publish
+Errorcounter: 3
+Errechnete Batteriekapazitaet: 61.71428571428578
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
++CGPS: 0
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+Errorcounter: 0
+AT+CGPS=0
+OK
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+not able to parse GPS Data
+
+********************************
+ Starting Cloud Update via SIM
+********************************
+
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+********************************
+   SIM Cloud Update finished
+********************************
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+AT+CGPS=1,1
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
++CGPS: 0
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+Errorcounter: 0
+AT+CGPS=0
+OK
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+not able to parse GPS Data
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+AT+CGPS=1,1
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPS=0
+OK
+
++CGPS: 0
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+                                                                                                                                                 
+********************************
+     VANBOX is starting up....
+********************************
+
+[press ctrl+c to end the Program]
+
+
+Connecting to MQTT Broker...
+Connected to Broker
+
+retry mqtt publish
+
+********************************
+      Starting GPS Update
+********************************
+
+Received Message: $SYS/broker/clients/active b'0'
+Received Message: $SYS/broker/clients/active b'1'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+
+retry mqtt publish
+Errorcounter: 0
+AT+CGPS=1,1
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+
+retry mqtt publish
+retry mqtt publish
+Errorcounter: 1
+
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+retry mqtt publish
+Errorcounter: 2
+
+retry mqtt publish
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
++CGPS: 0
+
+
+Traceback (most recent call last):
+  File "/home/pi/SmartVanIoT/vanbox.py", line 325, in <module>
+    battery_capacity_ahs = battery_set_ahs / 100 * ((sensordata["draw_voltage"] - 12) / 0.7 * 100)
+KeyError: 'draw_voltage'
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Received Message: $SYS/broker/clients/active b'2'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+Errorcounter: 5
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+Errorcounter: 0
+AT+CGPS=0
+OK
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+not able to parse GPS Data
+
+********************************
+     VANBOX is starting up....
+********************************
+
+[press ctrl+c to end the Program]
+
+
+Connecting to MQTT Broker...
+Connected to Broker
+
+retry mqtt publish
+
+********************************
+      Starting GPS Update
+********************************
+
+Received Message: $SYS/broker/clients/active b'0'
+Received Message: $SYS/broker/clients/active b'1'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+
+retry mqtt publish
+Errorcounter: 0
+AT+CGPS=1,1
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+
+retry mqtt publish
+retry mqtt publish
+Errorcounter: 1
+
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+retry mqtt publish
+Errorcounter: 2
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+retry mqtt publish
+Errorcounter: 3
+Errechnete Batteriekapazitaet: 59.39999999999998AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
++CGPS: 0
+
+********************************
+         GPS Error
+********************************
+
+
+
+Errorcounter: 4
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Received Message: snowball/switch/2 b'on'
+LEDS on
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/light/dimmer b'100'
+Errorcounter: 13
+set dimmer 1.0 [255, 255, 255]
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Received Message: snowball/switch/2 b'off'
+Errorcounter: 18
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Received Message: snowball/switch/2 b'on'
+LEDS on
+Received Message: snowball/light/dimmer b'100'
+Errorcounter: 20
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/light/dimmer b'100'
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/switch/2 b'off'
+Errorcounter: 21
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+Errorcounter: 0
+AT+CGPS=0
+OK
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+not able to parse GPS Data
+
+********************************
+ Starting Cloud Update via SIM
+********************************
+
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+Received Message: $SYS/broker/clients/active b'2'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+Received Message: $SYS/broker/clients/active b'1'
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+********************************
+   SIM Cloud Update finished
+********************************
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+AT+CGPS=1,1
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
++CGPS: 0
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+Errorcounter: 0
+AT+CGPS=0
+OK
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+not able to parse GPS Data
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+AT+CGPS=1,1
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPS=0
+OK
+
++CGPS: 0
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+Errorcounter: 0
+AT+CGPS=0
+OK
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+not able to parse GPS Data
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+AT+CGPS=1,1
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+
++CGPS: 0
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+Errorcounter: 0
+AT+CGPS=0
+OK
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 2
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 3
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 4
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 5
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 6
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 7
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 8
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 9
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 10
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
+not able to parse GPS Data
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+AT+CGPS=1,1
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: 4804.524145,N,01114.896535,E,110422,171810.0,598.4,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.524145,N,01114.896535,E,110422,171810.0,598.4,0.0,
+
+OK
+
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 1
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: 4804.522007,N,01114.897450,E,110422,172308.0,603.9,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.522007,N,01114.897450,E,110422,172308.0,603.9,0.0,
+
+OK
+
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 1
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: 4804.521934,N,01114.897893,E,110422,172808.0,605.0,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.521934,N,01114.897893,E,110422,172808.0,605.0,0.0,
+
+OK
+
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 1
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: 4804.521915,N,01114.898241,E,110422,173310.0,605.9,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.521915,N,01114.898241,E,110422,173310.0,605.9,0.0,
+
+OK
+
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 1
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: 4804.521876,N,01114.898399,E,110422,173810.0,606.4,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.521876,N,01114.898399,E,110422,173810.0,606.4,0.0,
+
+OK
+
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 1
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: 4804.521828,N,01114.898353,E,110422,174330.0,606.2,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.521828,N,01114.898353,E,110422,174330.0,606.2,0.0,
+
+OK
+
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 1
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: 4804.521615,N,01114.898602,E,110422,174825.0,606.4,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.521615,N,01114.898602,E,110422,174825.0,606.4,0.0,
+
+OK
+
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 1
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: 4804.521703,N,01114.898516,E,110422,175325.0,606.5,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.521703,N,01114.898516,E,110422,175325.0,606.5,0.0,
+
+OK
+
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 1
+Errorcounter: 1
+AT+CGPSINFO
++CGPSINFO: 4804.521813,N,01114.898712,E,110422,175825.0,607.2,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.521813,N,01114.898712,E,110422,175825.0,607.2,0.0,
+
+OK
+
+
+
+
+********************************
+ Starting Cloud Update via SIM
+********************************
+
+
+Exception in thread Thread-2171:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/threading.py", line 954, in _bootstrap_inner
+    self.run()
+  File "/home/pi/SmartVanIoT/cloud.py", line 100, in run
+    self.send_at('AT+CSQ','OK',1)
+  File "/home/pi/SmartVanIoT/cloud.py", line 39, in send_at
+    sim_serial.write((command+'\r\n').encode())
+  File "/usr/local/lib/python3.9/dist-packages/serial/serialposix.py", line 615, in write
+    raise PortNotOpenError()
+serial.serialutil.PortNotOpenError: Attempting to use a port that is not open
+Received Message: $SYS/broker/clients/active b'2'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+Received Message: snowball/switch/2 b'on'
+LEDS on
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/light/set_color b'#ffa44f'
+Received Message: $SYS/broker/clients/active b'3'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'on'
+LEDS on
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 164, 79]
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 164, 79]
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 164, 79]
+
+************************************
+   Battery Below Critical Limit
+ If this stays, warning will trigger
+*************************************
+
+Received Message: snowball/switch/calibrate_capacity b'on'
+Battery now set to fully charged
+Received Message: $SYS/broker/clients/active b'2'
+Received Message: snowball/light/set_color b'#ff6347'
+Received Message: snowball/light/set_color b'#b32222'
+Received Message: snowball/light/set_color b'#ffa44f'
+Received Message: snowball/light/dimmer b'54'
+set dimmer 0.54 [137, 88, 42]
+Received Message: snowball/light/set_color b'#ff6347'
+Received Message: snowball/light/set_color b'#b32222'
+Received Message: $SYS/broker/clients/active b'3'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'on'
+LEDS on
+Received Message: snowball/light/dimmer b'54'
+set dimmer 0.54 [96, 18, 18]
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+Received Message: snowball/light/dimmer b'54'
+set dimmer 0.54 [96, 18, 18]
+Received Message: snowball/light/dimmer b'54'
+set dimmer 0.54 [96, 18, 18]
+Received Message: $SYS/broker/clients/active b'2'
+Received Message: $SYS/broker/clients/active b'3'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'on'
+LEDS on
+Received Message: snowball/light/dimmer b'54'
+set dimmer 0.54 [96, 18, 18]
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+Received Message: snowball/light/dimmer b'54'
+set dimmer 0.54 [96, 18, 18]
+Received Message: snowball/light/dimmer b'54'
+set dimmer 0.54 [96, 18, 18]
+Received Message: $SYS/broker/clients/active b'2'
+Terminated

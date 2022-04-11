@@ -84,7 +84,7 @@ class UpdateThingspeak(threading.Thread):
             except:
                 print('')
                 print('********************************')
-                print('  Wifi Cloud Update error')
+                print('  Wifi Cloud Update failed')
                 print('********************************')
                 print('')
                 print('')
@@ -97,6 +97,8 @@ class UpdateThingspeak(threading.Thread):
             print('')
             print('')
 
+            if sim_serial.isOpen() == False:
+                sim_serial.open()
             self.send_at('AT+CSQ','OK',1)
             self.send_at('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
             self.send_at('AT+HTTPINIT','OK',1)

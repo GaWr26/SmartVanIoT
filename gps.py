@@ -37,12 +37,12 @@ class UpdateGPS(threading.Thread):
             rec_buff = sim_serial.read(sim_serial.inWaiting())
             if rec_buff != '':
                 if back not in rec_buff.decode():
-                    #print(command + ' ERROR')
-                    #print(command + ' back:\t' + rec_buff.decode())
+                    print(command + ' ERROR')
+                    print(command + ' back:\t' + rec_buff.decode())
                     return 0
                 else:
                     last_position = rec_buff.decode()
-                    print(last_position)
+                    #print(last_position)
                     try:
                         #sensordata["lat"] = float(last_position[25:36])#/100
                         #sensordata["long"] = float(last_position[39:51])#/100
@@ -104,10 +104,10 @@ class UpdateGPS(threading.Thread):
                     rec_null = True
                     time.sleep(1)
                 else:
-                    #print("GPS OK")
+                    print("GPS OK")
                     rec_null = False
             else:
-                #print('error %d'%answer)
+                print('error %d'%answer)
                 rec_buff = ''
                 self.send_at('AT+CGPS=0','OK',1)
                 #return False

@@ -1,5 +1,283 @@
 
 ********************************
+  Wifi Cloud Update finished
+********************************
+
+
+Received Message: $SYS/broker/clients/active b'3'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+Errorcounter: 0
+AT+CGPSINFO
++CGPSINFO: 4804.418590,N,01116.452592,E,110422,154740.0,593.9,13.2,88.2
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.418590,N,01116.452592,E,110422,154740.0,593.9,13.2,88.2
+
+OK
+
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+Errorcounter: 0
+AT+CGPSINFO
++CGPSINFO: 4803.573503,N,01117.334445,E,110422,155240.0,601.2,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4803.573503,N,01117.334445,E,110422,155240.0,601.2,0.0,
+
+OK
+
+
+
+
+********************************
+ Starting Cloud Update via Wifi
+********************************
+
+
+
+********************************
+  Wifi Cloud Update finished
+********************************
+
+
+Received Message: $SYS/broker/clients/active b'2'
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+Errorcounter: 0
+AT+CGPSINFO
++CGPSINFO: 4803.379243,N,01117.091823,E,110422,155741.0,602.1,31.3,239.6
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4803.379243,N,01117.091823,E,110422,155741.0,602.1,31.3,239.6
+
+OK
+
+
+
+Received Message: snowball/switch/2 b'on'
+LEDS on
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/2 b'on'
+LEDS on
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/2 b'on'
+LEDS on
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/switch/2 b'off'
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+Errorcounter: 0
+AT+CGPSINFO
++CGPSINFO: 4804.346828,N,01115.669387,E,110422,160242.0,604.4,16.9,243.5
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.346828,N,01115.669387,E,110422,160242.0,604.4,16.9,243.5
+
+OK
+
+
+
+
+********************************
+ Starting Cloud Update via SIM
+********************************
+
+
+********************************
+   SIM Cloud Update Error
+********************************
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+Errorcounter: 0
+AT+CGPSINFO
++CGPSINFO: 4804.246184,N,01115.541961,E,110422,160742.0,596.5,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.246184,N,01115.541961,E,110422,160742.0,596.5,0.0,
+
+OK
+
+
+
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+Errorcounter: 0
+AT+CGPSINFO
++CGPSINFO: 4804.325580,N,01114.815297,E,110422,161246.0,591.8,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.325580,N,01114.815297,E,110422,161246.0,591.8,0.0,
+
+OK
+
+
+
+
+********************************
+ Starting Cloud Update via SIM
+********************************
+
+
+********************************
+   SIM Cloud Update Error
+********************************
+
+
+Received Message: $SYS/broker/clients/active b'3'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+Received Message: $SYS/broker/clients/active b'2'
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+Errorcounter: 0
+AT+CGPSINFO
++CGPSINFO: 4804.520785,N,01114.898294,E,110422,161746.0,595.1,0.0,
+
+OK
+
+********************************
+         GPS Success
+********************************
+
+
+AT+CGPSINFO
++CGPSINFO: 4804.520785,N,01114.898294,E,110422,161746.0,595.1,0.0,
+
+OK
+
+
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Connected to Broker
+
+Received Message: $SYS/broker/clients/active b'3'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+
+********************************
      VANBOX is starting up....
 ********************************
 
@@ -19,156 +297,102 @@ Received Message: $SYS/broker/clients/active b'1'
 
 retry mqtt publish
 Errorcounter: 0
-AT+CGPS=1,1
-OK
-
-********************************
-         GPS Error
-********************************
-
-
 retry mqtt publish
 retry mqtt publish
-Errorcounter: 1
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-retry mqtt publish
-Errorcounter: 2
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-retry mqtt publish
-Errechnete Batteriekapazitaet: 135.77142857142857Errorcounter: 3
-
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-+CGPS: 0
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 4
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 5
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 6
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 7
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 8
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 9
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 10
 Errorcounter: 0
-AT+CGPS=0
-OK
 AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
++CGPSINFO: 4804.520610,N,01114.898227,E,110422,162306.0,596.5,0.0,
 
 OK
 
 ********************************
-         GPS Error
+         GPS Success
 ********************************
 
 
-Errorcounter: 1
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 2
 AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
++CGPSINFO: 4804.520610,N,01114.898227,E,110422,162306.0,596.5,0.0,
+
+OK
+
+
+
+retry mqtt publish
+
+********************************
+ Starting Cloud Update via SIM
+********************************
+
+
+retry mqtt publish
+Errechnete Batteriekapazitaet: 64.28571428571429
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+Received Message: $SYS/broker/clients/active b'2'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+AT+HTTPINIT back:	AT+HTTPINIT
+ERROR
+
+********************************
+   SIM Cloud Update finished
+********************************
+
+
+Received Message: $SYS/broker/clients/active b'3'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
+Received Message: snowball/switch/2 b'on'
+LEDS on
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/light/dimmer b'100'
+set dimmer 1.0 [255, 255, 255]
+Received Message: snowball/light/set_color b'#ffa44f'
+
+********************************
+      Starting GPS Update
+********************************
+
+Errorcounter: 0
+Errorcounter: 0
+AT+CGPSINFO
++CGPSINFO: 4804.520500,N,01114.898338,E,110422,162751.0,597.0,0.0,
 
 OK
 
 ********************************
-         GPS Error
+         GPS Success
 ********************************
 
 
-Errorcounter: 3
-AT+CGPS=0
+AT+CGPSINFO
++CGPSINFO: 4804.520500,N,01114.898338,E,110422,162751.0,597.0,0.0,
+
 OK
 
-********************************
-         GPS Error
-********************************
 
 
-Terminated
 
 ********************************
      VANBOX is starting up....
@@ -187,20 +411,19 @@ retry mqtt publish
 ********************************
 
 Received Message: $SYS/broker/clients/active b'0'
+retry mqtt publish
+Errorcounter: 0
 Received Message: $SYS/broker/clients/active b'1'
 Received Message: snowball/switch/1 b'on'
 Received Message: snowball/switch/2 b'off'
 Received Message: snowball/switch/3 b'on'
 Received Message: snowball/switch/4 b'on'
+retry mqtt publish
 
-retry mqtt publish
 Errorcounter: 0
 retry mqtt publish
-retry mqtt publish
-retry mqtt publish
-Errorcounter: 0
 AT+CGPSINFO
-+CGPSINFO: 4804.514870,N,01114.898354,E,110422,090441.0,596.8,0.0,
++CGPSINFO: 4804.520483,N,01114.898369,E,110422,162924.0,597.3,0.0,
 
 OK
 
@@ -210,1039 +433,28 @@ OK
 
 
 AT+CGPSINFO
-+CGPSINFO: 4804.514870,N,01114.898354,E,110422,090441.0,596.8,0.0,
++CGPSINFO: 4804.520483,N,01114.898369,E,110422,162924.0,597.3,0.0,
 
 OK
 
 
 
-retry mqtt publish
-Errechnete Batteriekapazitaet: 116.48571428571428
 
 ********************************
  Starting Cloud Update via Wifi
 ********************************
 
 
-Received Message: $SYS/broker/clients/active b'2'
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
 
 ********************************
   Wifi Cloud Update error
 ********************************
 
 
-Terminated
-
-********************************
-     VANBOX is starting up....
-********************************
-
-[press ctrl+c to end the Program]
-
-
-Connecting to MQTT Broker...
-Connected to Broker
-
-retry mqtt publish
-
-********************************
-      Starting GPS Update
-********************************
-
-Received Message: $SYS/broker/clients/active b'0'
-Received Message: $SYS/broker/clients/active b'1'
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
-
-retry mqtt publish
-Errorcounter: 0
 retry mqtt publish
 retry mqtt publish
-Errorcounter: 0
-AT+CGPSINFO
-+CGPSINFO: 4804.515739,N,01114.898557,E,110422,091630.0,596.6,0.0,
-
-OK
-
-********************************
-         GPS Success
-********************************
-
-
-AT+CGPSINFO
-+CGPSINFO: 4804.515739,N,01114.898557,E,110422,091630.0,596.6,0.0,
-
-OK
-
-
-
-retry mqtt publish
-retry mqtt publish
-Errechnete Batteriekapazitaet: 111.85714285714288
-
-********************************
- Starting Cloud Update via Wifi
-********************************
-
-
-Received Message: $SYS/broker/clients/active b'2'
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
-
-********************************
-  Wifi Cloud Update finished
-********************************
-
-
-
-********************************
-      Starting GPS Update
-********************************
-
-Errorcounter: 0
-Errorcounter: 0
-AT+CGPSINFO
-+CGPSINFO: 4804.515844,N,01114.898886,E,110422,092616.0,598.2,0.0,
-
-OK
-
-********************************
-         GPS Success
-********************************
-
-
-AT+CGPSINFO
-+CGPSINFO: 4804.515844,N,01114.898886,E,110422,092616.0,598.2,0.0,
-
-OK
-
-
-
-
-********************************
- Starting Cloud Update via Wifi
-********************************
-
-
-
-********************************
-  Wifi Cloud Update finished
-********************************
-
-
-
-********************************
-      Starting GPS Update
-********************************
-
-Errorcounter: 0
-Errorcounter: 0
-AT+CGPSINFO
-+CGPSINFO: 4804.516176,N,01114.899269,E,110422,093616.0,599.9,0.0,
-
-OK
-
-********************************
-         GPS Success
-********************************
-
-
-AT+CGPSINFO
-+CGPSINFO: 4804.516176,N,01114.899269,E,110422,093616.0,599.9,0.0,
-
-OK
-
-
-
-
-********************************
- Starting Cloud Update via Wifi
-********************************
-
-
-
-********************************
-  Wifi Cloud Update finished
-********************************
-
-
-Terminated
-
-********************************
-     VANBOX is starting up....
-********************************
-
-[press ctrl+c to end the Program]
-
-
-Connecting to MQTT Broker...
-Connected to Broker
-
-retry mqtt publish
-
-********************************
-      Starting GPS Update
-********************************
-
-Received Message: $SYS/broker/clients/active b'0'
-retry mqtt publish
-Errorcounter: 0
-AT+CGPS=1,1
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-retry mqtt publish
-retry mqtt publish
-Errorcounter: 1
-retry mqtt publish
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 2
-
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-retry mqtt publish
-Errorcounter: 3
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-+CGPS: 0
-
-********************************
-         GPS Error
-********************************
-
-
-
-Traceback (most recent call last):
-  File "/home/pi/SmartVanIoT/vanbox.py", line 325, in <module>
-    battery_capacity_ahs = battery_set_ahs / 100 * ((sensordata["draw_voltage"] - 12) / 0.7 * 100)
-KeyError: 'draw_voltage'
-Errorcounter: 4
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 5
-Received Message: $SYS/broker/clients/active b'2'
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
-Errorcounter: 6
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 7
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 8
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 9
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 10
-Errorcounter: 0
-AT+CGPS=0
-OK
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 1
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 2
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 3
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 4
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 5
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 6
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 7
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 8
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 9
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 10
-not able to parse GPS Data
-
-********************************
-     VANBOX is starting up....
-********************************
-
-[press ctrl+c to end the Program]
-
-
-Connecting to MQTT Broker...
-Connected to Broker
-
-retry mqtt publish
-
-********************************
-      Starting GPS Update
-********************************
-
-Received Message: $SYS/broker/clients/active b'0'
-Received Message: $SYS/broker/clients/active b'1'
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
-
-retry mqtt publish
-Errorcounter: 0
-AT+CGPS=1,1
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-
-retry mqtt publish
-retry mqtt publish
-Errorcounter: 1
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-retry mqtt publish
-Errorcounter: 2
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-retry mqtt publish
-Errorcounter: 3
-Errechnete Batteriekapazitaet: 128.82857142857142
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-+CGPS: 0
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 4
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 5
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 6
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 7
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 8
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 9
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 10
-Errorcounter: 0
-AT+CGPS=0
-OK
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 1
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 2
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 3
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Received Message: $SYS/broker/clients/active b'2'
-Errorcounter: 4
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
-Errorcounter: 5
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 6
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 7
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 8
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 9
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 10
-not able to parse GPS Data
-
-********************************
- Starting Cloud Update via Wifi
-********************************
-
-
-Received Message: $SYS/broker/clients/active b'3'
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
-Terminated
-
-********************************
-     VANBOX is starting up....
-********************************
-
-[press ctrl+c to end the Program]
-
-
-Connecting to MQTT Broker...
-Connected to Broker
-
-retry mqtt publish
-
-********************************
-      Starting GPS Update
-********************************
-
-Received Message: $SYS/broker/clients/active b'0'
-Received Message: $SYS/broker/clients/active b'1'
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
-
-retry mqtt publish
-Errorcounter: 0
-retry mqtt publish
-retry mqtt publish
-retry mqtt publish
-Errorcounter: 0
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-retry mqtt publish
-Errorcounter: 1
-AT+CGPS=0
-OK
-
-+CGPS: 0
-
-********************************
-         GPS Error
-********************************
-
-
-Errechnete Batteriekapazitaet: 120.59999999999998
-Errorcounter: 2
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 3
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 4
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 5
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 6
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 7
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 8
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 9
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 10
-not able to parse GPS Data
-
-********************************
- Starting Cloud Update via Wifi
-********************************
-
-
-
-********************************
-  Wifi Cloud Update finished
-********************************
-
-
-
-********************************
-      Starting GPS Update
-********************************
-
-Errorcounter: 0
-AT+CGPS=1,1
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 1
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 2
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 3
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-+CGPS: 0
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 4
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 5
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 6
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 7
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 8
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 9
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 10
-Errorcounter: 0
-AT+CGPS=0
-OK
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 1
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 2
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 3
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 4
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 5
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 6
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 7
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 8
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 9
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 10
-not able to parse GPS Data
-
-********************************
- Starting Cloud Update via Wifi
-********************************
-
-
-
-********************************
-  Wifi Cloud Update finished
-********************************
-
-
-
+Errechnete Batteriekapazitaet: 51.942857142857136
+                                                                                                                                                                                                                                                                                                                                                                                                           
 ********************************
      VANBOX is starting up....
 ********************************
@@ -1288,6 +500,8 @@ Errorcounter: 2
 AT+CGPS=0
 OK
 
++CGPS: 0
+
 ********************************
          GPS Error
 ********************************
@@ -1295,17 +509,15 @@ OK
 
 retry mqtt publish
 Errorcounter: 3
-Errechnete Batteriekapazitaet: 121.11428571428576
-AT+CGPSINFO
+Errechnete Batteriekapazitaet: 59.657142857142915AT+CGPSINFO
 +CGPSINFO: ,,,,,,,,
 
 OK
 
-+CGPS: 0
-
 ********************************
          GPS Error
 ********************************
+
 
 
 Errorcounter: 4
@@ -1317,6 +529,11 @@ OK
 ********************************
 
 
+Received Message: $SYS/broker/clients/active b'2'
+Received Message: snowball/switch/1 b'on'
+Received Message: snowball/switch/2 b'off'
+Received Message: snowball/switch/3 b'on'
+Received Message: snowball/switch/4 b'on'
 Errorcounter: 5
 AT+CGPSINFO
 +CGPSINFO: ,,,,,,,,
@@ -1328,11 +545,6 @@ OK
 ********************************
 
 
-Received Message: $SYS/broker/clients/active b'1'
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
 Errorcounter: 6
 AT+CGPS=0
 OK
@@ -1374,6 +586,206 @@ OK
 
 
 Errorcounter: 10
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 11
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 12
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 13
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 14
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 15
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 16
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 17
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 18
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 19
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 20
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 21
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 22
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 23
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 24
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 25
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 26
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 27
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 28
+AT+CGPS=0
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 29
+AT+CGPSINFO
++CGPSINFO: ,,,,,,,,
+
+OK
+
+********************************
+         GPS Error
+********************************
+
+
+Errorcounter: 30
 Errorcounter: 0
 AT+CGPS=0
 OK
@@ -1415,192 +827,4 @@ OK
          GPS Error
 ********************************
 
-
-Errorcounter: 4
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 5
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 6
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 7
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 8
-AT+CGPSINFO
-+CGPSINFO: ,,,,,,,,
-
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 9
-AT+CGPS=0
-OK
-
-********************************
-         GPS Error
-********************************
-
-
-Errorcounter: 10
-not able to parse GPS Data
-Received Message: $SYS/broker/clients/active b'2'
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
-
-********************************
- Starting Cloud Update via SIM
-********************************
-
-
-AT+HTTPINIT back:	AT+HTTPINIT
-ERROR
-
-Terminated
-
-********************************
-     VANBOX is starting up....
-********************************
-
-[press ctrl+c to end the Program]
-
-
-Connecting to MQTT Broker...
-Connected to Broker
-
-retry mqtt publish
-Received Message: $SYS/broker/clients/active b'0'
-
-********************************
-      Starting GPS Update
-********************************
-
-Received Message: $SYS/broker/clients/active b'1'
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
-retry mqtt publish
-Errorcounter: 0
-
-retry mqtt publish
-retry mqtt publish
-Errorcounter: 0
-AT+CGPSINFO
-+CGPSINFO: 4804.518968,N,01114.904077,E,110422,102547.0,597.7,0.0,
-
-OK
-
-********************************
-         GPS Success
-********************************
-
-
-AT+CGPSINFO
-+CGPSINFO: 4804.518968,N,01114.904077,E,110422,102547.0,597.7,0.0,
-
-OK
-
-
-
-retry mqtt publish
-retry mqtt publish
-Errechnete Batteriekapazitaet: 140.39999999999998
-Received Message: $SYS/broker/clients/active b'2'
-Received Message: snowball/switch/2 b'on'
-LEDS on
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
-Received Message: snowball/light/dimmer b'100'
-set dimmer 1.0 [255, 255, 255]
-Received Message: snowball/light/dimmer b'100'
-set dimmer 1.0 [255, 255, 255]
-Received Message: snowball/switch/2 b'on'
-LEDS on
-Received Message: snowball/light/dimmer b'100'
-set dimmer 1.0 [255, 255, 255]
-Received Message: snowball/light/dimmer b'100'
-set dimmer 1.0 [255, 255, 255]
-Received Message: $SYS/broker/clients/active b'3'
-Received Message: snowball/switch/1 b'on'
-Received Message: snowball/light/set_color b'#ffa44f'
-Received Message: snowball/switch/2 b'on'
-LEDS on
-Received Message: snowball/light/dimmer b'100'
-set dimmer 1.0 [255, 164, 79]
-Received Message: snowball/switch/3 b'on'
-Received Message: snowball/switch/4 b'on'
-Received Message: snowball/light/dimmer b'100'
-set dimmer 1.0 [255, 164, 79]
-Received Message: snowball/light/dimmer b'100'
-set dimmer 1.0 [255, 164, 79]
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/2 b'on'
-LEDS on
-Received Message: snowball/light/dimmer b'100'
-set dimmer 1.0 [255, 164, 79]
-Received Message: snowball/light/dimmer b'100'
-set dimmer 1.0 [255, 164, 79]
-Received Message: snowball/light/set_color b'#b32222'
-Received Message: snowball/light/set_color b'#ff6347'
-Received Message: snowball/light/set_color b'#ffffff'
-Received Message: snowball/light/set_color b'#ffa44f'
-Received Message: snowball/light/set_color b'#ffa44f'
-Received Message: snowball/light/set_color b'#ffffff'
-Received Message: snowball/switch/2 b'off'
-Received Message: snowball/switch/2 b'on'
-LEDS on
-Received Message: snowball/light/dimmer b'100'
-set dimmer 1.0 [255, 255, 255]
-Received Message: snowball/light/dimmer b'100'
-set dimmer 1.0 [255, 255, 255]
-Received Message: snowball/light/set_color b'#ffa44f'
-Received Message: snowball/light/set_color b'#ffffff'
-Received Message: snowball/switch/2 b'off'
-
-********************************
- Starting Cloud Update via SIM
-********************************
-
-
-AT+HTTPINIT back:	AT+HTTPINIT
-ERROR
 

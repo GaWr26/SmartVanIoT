@@ -29,7 +29,7 @@ class UpdateGPS(threading.Thread):
         sim_serial.write((command+'\r\n').encode())
         time.sleep(timeout)
         print("Errorcounter: " + str(error_counter))
-        if error_counter >= 10:
+        if error_counter >= 30:
             error_counter = 0
             return 1
         if sim_serial.inWaiting():
@@ -56,7 +56,7 @@ class UpdateGPS(threading.Thread):
 
                         DDLong = int(float(long)/100)
                         MMLong = float(long) - DDLong * 100
-                        sensordata["long"] = DDLong + MMLong/60 
+                        sensordata["long"] = DDLong + MMLong/60
 
                         print('********************************')
                         print('         GPS Success')

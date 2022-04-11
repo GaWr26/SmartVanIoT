@@ -39,9 +39,9 @@ modem_busy = False
 
 # Delays and times
 lastCloudUpdate = 0
-cloud_update_delay = 1800
+cloud_update_delay = 3600
 lastGPSUpdate = 0
-gps_update_delay = 600
+gps_update_delay = 300
 lastSensorUpdate = 0
 sensor_update_delay = 1
 lastToggle = 0

@@ -320,9 +320,13 @@ while system_run:
 
     if lastSensorUpdate == 0 or time.time() - lastSensorUpdate >= sensor_update_delay:
         if lastSensorUpdate > 1:
-            if skip_first >= 5:
+            if skip_first >= 10:
                 if battery_capacity_ahs == 0:
-                    battery_capacity_ahs = battery_set_ahs / 100 * ((sensordata["draw_voltage"] - 12) / 0.7 * 100)
+                    if sensordata["draw_voltage"] >= 12.7:
+                        currentvoltage = 12.7
+                    else:
+                        currentvoltage = sensordata["draw_voltage"]
+                    battery_capacity_ahs = battery_set_ahs / 100 * ((currentvoltage - 12) / 0.7 * 100)
                     print("Errechnete Batteriekapazitaet: " +  str(battery_capacity_ahs))
 
                 if amphour_start_time == 0:

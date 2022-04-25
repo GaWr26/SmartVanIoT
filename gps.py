@@ -4,6 +4,7 @@ import threading
 
 #SIM & GPS Module
 sim_serial = serial.Serial('/dev/ttyUSB3',115200)
+sim_serial.flushInput()
 
 sensordata = {}
 error_counter = 0
@@ -41,6 +42,7 @@ class UpdateGPS(threading.Thread):
                 #print(command + ' back:\t' + rec_buff.decode())
                 return 0
             else:
+                #print(rec_buff.decode())
                 last_position = rec_buff.decode()
                 #print(last_position)
                 try:
@@ -68,6 +70,7 @@ class UpdateGPS(threading.Thread):
                     return 1
                 except:
                     error_counter = error_counter + 1
+                    print('')
                     print('********************************')
                     print('         GPS Error')
                     print('********************************')
@@ -105,11 +108,6 @@ class UpdateGPS(threading.Thread):
                 else:
                     #print("GPS OK")
                     rec_null = False
-            else:
-                print('error %d'%answer)
-                rec_buff = ''
-                self.send_at('AT+CGPS=0','OK',1)
-                return False
             time.sleep(1.5)
         sim_serial.close()
         self.parent and self.parent.on_gps_thread_finished(self, sensordata)

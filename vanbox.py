@@ -10,11 +10,9 @@ import json
 import urllib.request
 from threading import Thread
 from subprocess import call
-from gps import UpdateGPS
 from cloud import UpdateThingspeak
 from sensors import *
 from led import LED
-from sms import SMS
 from simmodule import SIMMODULE
 
 system_run = True

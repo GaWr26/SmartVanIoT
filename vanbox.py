@@ -42,7 +42,7 @@ modem_busy = False
 
 # Delays and times
 lastCloudUpdate = 0
-cloud_update_delay = 300
+cloud_update_delay = 900
 sim_update_counter = 0
 
 lastSensorUpdate = 0
@@ -107,7 +107,7 @@ def on_message(client, userdata, msg):
     global amphours_charge_total
     global amphours_draw_total
     dimmer_value = str(re.findall(r"'(.*?)'", dimmer)[0])
-    print("Received Message: " + msg.topic+" "+str(msg.payload))
+    #print("Received Message: " + msg.topic+" "+str(msg.payload))
     if msg.topic == 'snowball/light/set_color':
         ledcontrol.setLightColor(str(msg.payload)[3:9])
     elif msg.topic == 'snowball/light/dimmer':
@@ -264,11 +264,7 @@ class Manager(object):
         client.publish("snowball/sensor/battery_charge_power", sensordata["charge_power"])
         client.publish("snowball/sensor/accelerometer_x",sensordata["acc_x"])
         client.publish("snowball/sensor/accelerometer_y",sensordata["acc_y"])
-        try:
-            client.publish("snowball/sensor/remaining_ahs",sensordata["remaining_ahs"])
-            client.publish("snowball/sensor/time_remaining",sensordata["time_remaining"])
-        except:
-            print("AHS not ready")
+
 
         #print("Sensor Data sent to MQTT broker")
 
@@ -367,6 +363,12 @@ while system_run:
                 if sensordata["time_remaining"] < 0:
                     sensordata["time_remaining"] = "∞"
 
+                try:
+                    client.publish("snowball/sensor/remaining_ahs",sensordata["remaining_ahs"])
+                    client.publish("snowball/sensor/time_remaining",sensordata["time_remaining"])
+                except:
+                    print("AHS not ready")
+
             skip_first = skip_first + 1
 
         #print (json.dumps(sensordata, indent=2))
@@ -378,18 +380,18 @@ while system_run:
     if lastCloudUpdate == 0 or time.time() - lastCloudUpdate >= cloud_update_delay:
         if skip_first >= 11:
             if is_online():
-                #print("Updating Cloud via WIFI")
+                #print("WIFI Update")
                 cloudupdate = mgr.new_cloud_update_thread()
                 cloudupdate.start()
                 sim_update_counter = 0
             else:
                 if(sim_update_counter == 0):
+                    #print("SIM Update")
                     simmodule.update_cloud(sensordata)
-                    #print("Updating Cloud via SIM")
-                    sim_update_counter = sim_update_counter + 1
-                    if(sim_update_counter == 4):
-                        sim_update_counter = 0
                 else:
                     print("Skipping Cloud update via SIM")
 
+                sim_update_counter = sim_update_counter + 1
+                if(sim_update_counter >= 4):
+                    sim_update_counter = 0
             lastCloudUpdate = time.time()

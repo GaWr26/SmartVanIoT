@@ -1,27 +1,19 @@
-# SmartVanIoT
+# SmartVanIoT - VanBox
 
-Experimenting with Sensors for my VW Camper Van.
+The story starts three years ago when I bought an almost dead VW T3. I re-built it completely and got to a point where I started planning the electric setup. I pretty soon got very frustrated by the amount of standalone components e.g Battery meter and their cost. Having a background in this kind of stuff I started to build my own solution.The idea is to have a system, that you connect to your second battery, and all other appliances just get connected to the box. I built the first version and had it in my Van last year. I got a lot of interest from people when I showed them what it does. This made me think to do a second iteration and plan it in way that would scale.
 
-Gathering Sensor-Data for:
-- Battery voltage
-- Battery current
-- Temperature
-- Humidity
+What I now have is v2 and I would like to share what it does:
 
-![Setup](/images/setup.jpg)
+It's designed to be simple and flexible. You connect the battery and all power inputs e.g. Solar charge controller, Mains Charger etc, to the inputs on the left.On the right you have the connections for the appliances on the top, and sensors and buttons etc. at the bottom.
 
-Additionally controlling Relais for mains and all appliances.
-As I have digital LEDs in the Van, I also added control for these.
-If the voltage drops below a certain value, the mains relais shuts off and the raspberry pi shuts itself down.
+One key component to the system is the SIM Module which enables cloud updates and gps positioning. So basically my Van is an IoT device that updates it's sensor and position values to the cloud so I always know where it is and e.g how the battery is doing.
 
-All communication is based on the MQTT protocol and I use an instance of IoBroker on the pi for the Broker.
-The brain is a Raspberry Pi Zero W which works great for this Application as the whole setup is using 0.2 Amps when idle.
+I connected temperature and humidity sensors inside and outside the van.There's a gyro for helping to park level so I can sleep well :) It measures voltage, draw and power on the appliance side and on the inputs. If the battery capacity drops below a certain threshold, the system notifies me and if it drops even further it removes all appliances from power and shuts itself down to protect the battery.
 
-To visualize everything I use an Android App called MQTT Dashboard where you can customize the Dashboard to your needs:
+It's able to connect and control digital LEDs
 
-![Dashboard](/images/Dashboard_1.jpg)
-![Dashboard](/images/Dashboard_2.jpg)
-![Dashboard](/images/Dashboard_3.jpg)
+And of course there's an App. Here you can switch the appliances, control the light, check the position and relevant sensor data. My favourite feature is that it shows you how much battery time you have left with the current load.
 
+If my phone is not present, the system switches to away mode and I get notified about movement and vibrations.
 
-Next up will be storing relevant data in an Influx Database and visualizing it via Grafana
+The brain currently is a raspberry pi zero using mqtt for communication and running a python app as the server.

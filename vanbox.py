@@ -201,31 +201,6 @@ client.on_connect = on_connect
 client.on_message = on_message
 client.loop_start()
 
-def publish_to_mqtt():
-    try:
-        # SEND IT - to MQTT
-        client.publish("snowball/sensor/temp_inside",sensordata["temp_inside"])
-        client.publish("snowball/sensor/humidity_inside",sensordata["humid_inside"])
-        client.publish("snowball/sensor/temp_outside",sensordata["temp_outside"])
-        client.publish("snowball/sensor/humidity_outside",sensordata["humid_outside"])
-        client.publish("snowball/sensor/battery_draw_voltage", sensordata["draw_voltage"])
-        client.publish("snowball/sensor/battery_draw_current", sensordata["draw_current"])
-        client.publish("snowball/sensor/battery_draw_power", sensordata["draw_power"])
-        client.publish("snowball/sensor/battery_charge_voltage", sensordata["charge_voltage"])
-        client.publish("snowball/sensor/battery_charge_current", sensordata["charge_current"])
-        client.publish("snowball/sensor/battery_charge_power", sensordata["charge_power"])
-        client.publish("snowball/sensor/accelerometer_x",sensordata["acc_x"])
-        client.publish("snowball/sensor/accelerometer_y",sensordata["acc_y"])
-        client.publish("snowball/sensor/remaining_ahs",sensordata["remaining_ahs"])
-        client.publish("snowball/sensor/time_remaining",sensordata["time_remaining"])
-        client.publish("snowball/position/alt", sensordata["alt"])
-        client.publish("snowball/position/speed", sensordata["speed"])
-        client.publish("snowball/position/lat_long", str(sensordata["lat"]) + "," + str(sensordata["long"]) + ",0.0000000,0.0")
-
-        #print("Data sent to MQTT broker")
-    except:
-        print("retry mqtt publish")
-
 class Manager(object):
     global sensordata
     global phone_number
@@ -233,15 +208,27 @@ class Manager(object):
 
     def new_simmodule_thread(self):
         return SIMMODULE(parent=self)
-    def on_sim_data(self, thread, data):
+    def on_gps_data(self, thread, data):
         #print("got sim data")
         try:
             sensordata["lat"] = data["lat"]
             sensordata["long"] = data["long"]
             sensordata["alt"] = data["alt"]
             sensordata["speed"] = data["speed"]
+            try:
+                client.publish("snowball/position/alt", sensordata["alt"])
+                client.publish("snowball/position/speed", sensordata["speed"])
+                client.publish("snowball/position/lat_long", str(sensordata["lat"]) + "," + str(sensordata["long"]) + ",0.0000000,0.0")
+            except:
+                print("retry mqtt publish")
         except:
             print("not able to parse GPS Data")
+
+    def new_cloud_update_thread(self):
+        return UpdateThingspeak(sensordata, parent=self)
+    def on_cloud_update_thread_finished(self, thread):
+        global modem_busy
+        modem_busy = False
 
     def new_led_thread(self):
         return LED(parent=self)
@@ -261,6 +248,28 @@ class Manager(object):
         sensordata["humid_inside"] = data["humid_inside"]
         sensordata["temp_outside"] = data["temp_outside"]
         sensordata["humid_outside"] = data["humid_outside"]
+
+
+        client.publish("snowball/sensor/temp_inside",sensordata["temp_inside"])
+        client.publish("snowball/sensor/humidity_inside",sensordata["humid_inside"])
+        client.publish("snowball/sensor/temp_outside",sensordata["temp_outside"])
+        client.publish("snowball/sensor/humidity_outside",sensordata["humid_outside"])
+        client.publish("snowball/sensor/battery_draw_voltage", sensordata["draw_voltage"])
+        client.publish("snowball/sensor/battery_draw_current", sensordata["draw_current"])
+        client.publish("snowball/sensor/battery_draw_power", sensordata["draw_power"])
+        client.publish("snowball/sensor/battery_charge_voltage", sensordata["charge_voltage"])
+        client.publish("snowball/sensor/battery_charge_current", sensordata["charge_current"])
+        client.publish("snowball/sensor/battery_charge_power", sensordata["charge_power"])
+        client.publish("snowball/sensor/accelerometer_x",sensordata["acc_x"])
+        client.publish("snowball/sensor/accelerometer_y",sensordata["acc_y"])
+        try:
+            client.publish("snowball/sensor/remaining_ahs",sensordata["remaining_ahs"])
+            client.publish("snowball/sensor/time_remaining",sensordata["time_remaining"])
+        except:
+            print("AHS not ready")
+
+        print("Sensor Data sent to MQTT broker")
+
 
 mgr = Manager()
 
@@ -361,50 +370,15 @@ while system_run:
         #print (json.dumps(sensordata, indent=2))
 
         sensor_thread.getData()
-        publish_to_mqtt()
         lastSensorUpdate = time.time()
 
 
     if lastCloudUpdate == 0 or time.time() - lastCloudUpdate >= cloud_update_delay:
         if skip_first >= 11:
             if is_online():
-
-                print('')
-                print('********************************')
-                print(' Starting Cloud Update via Wifi')
-                print('********************************')
-                print('')
-                print('')
-                try:
-                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field1=" + str(sensordata["humid_inside"]))
-                    time.sleep(20)
-                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field2=" + str(sensordata["temp_inside"]))
-                    time.sleep(20)
-                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field3=" + str(sensordata["draw_voltage"]))
-                    time.sleep(20)
-                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field4=" + str(sensordata["charge_current"]))
-                    time.sleep(20)
-                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field5=" + str(sensordata["draw_current"]))
-                    time.sleep(20)
-                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field6=" + str(sensordata["lat"]))
-                    time.sleep(20)
-                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field7=" + str(sensordata["long"]))
-                    print('')
-                    print('********************************')
-                    print('  Wifi Cloud Update finished')
-                    print('********************************')
-                    print('')
-                    print('')
-
-                except:
-                    print('')
-                    print('********************************')
-                    print('  Wifi Cloud Update failed')
-                    print('********************************')
-                    print('')
-                    print('')
+                cloudupdate = mgr.new_cloud_update_thread()
+                cloudupdate.start()
                 sim_update_counter = 0
-
             else:
                 if(sim_update_counter == 0):
                     simmodule.update_cloud(sensordata)

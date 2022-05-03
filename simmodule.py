@@ -37,12 +37,15 @@ class SIMMODULE(threading.Thread):
         if sim_serial.inWaiting():
             time.sleep(0.01 )
             rec_buff = sim_serial.read(sim_serial.inWaiting())
-        if back not in rec_buff.decode():
-            #print(command + ' ERROR')
-            #print(command + ' back:\t' + rec_buff.decode())
-            return 0
+        if rec_buff != '':
+            if back not in rec_buff.decode():
+                #print(command + ' ERROR')
+                #print(command + ' back:\t' + rec_buff.decode())
+                return 0
+            else:
+                return 1
         else:
-            return 1
+            return 0
 
 
     def sendsms(self, text):

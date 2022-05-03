@@ -1,5 +1,6 @@
 import urllib.request
 import time
+import datetime
 import threading
 
 global sensordata
@@ -30,6 +31,7 @@ class UpdateThingspeak(threading.Thread):
         print('')
         print('********************************')
         print(' Starting Cloud Update via Wifi')
+        print("   " + str(datetime.datetime.now()))
         print('********************************')
         print('')
         print('')
@@ -50,6 +52,7 @@ class UpdateThingspeak(threading.Thread):
             print('')
             print('********************************')
             print('  Wifi Cloud Update finished')
+            print("   " + str(datetime.datetime.now()))
             print('********************************')
             print('')
             print('')
@@ -57,6 +60,7 @@ class UpdateThingspeak(threading.Thread):
             print('')
             print('********************************')
             print('  Wifi Cloud Update failed')
+            print("   " + str(datetime.datetime.now()))
             print('********************************')
             print('')
             print('')

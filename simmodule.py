@@ -1,5 +1,6 @@
 import serial
 import time
+import datetime
 import threading
 import re
 from pynmeagps import NMEAReader
@@ -75,6 +76,7 @@ class SIMMODULE(threading.Thread):
         print('')
         print('********************************')
         print(' Starting Cloud Update via SIM')
+        print("   " + str(datetime.datetime.now()))
         print('********************************')
         print('')
         print('')
@@ -124,6 +126,7 @@ class SIMMODULE(threading.Thread):
         self.send_at('AT+HTTPACTION=0 ','OK',1)
         print('********************************')
         print('   SIM Cloud Update finished')
+        print("   " + str(datetime.datetime.now()))
         print('********************************')
         print('')
         print('')
@@ -167,7 +170,7 @@ class SIMMODULE(threading.Thread):
                         long = float(last_position[39:51])#/100
 
                         sensordata["alt"] = gps_list[6]
-                        sensordata["speed"] = float(gps_list[7])*1.609
+                        sensordata["speed"] = float(gps_list[7])*1.852
 
                         #So as latitude is in format DDMM.MMMMM
                         DDLat = int(float(lat)/100)
@@ -177,16 +180,16 @@ class SIMMODULE(threading.Thread):
                         DDLong = int(float(long)/100)
                         MMLong = float(long) - DDLong * 100
                         sensordata["long"] = DDLong + MMLong/60
-                        print('')
-                        print('********************************')
-                        print('         GPS Success')
-                        print("    lat: " + str(sensordata["lat"]))
-                        print("   long: " + str(sensordata["long"]))
-                        print("    alt: " + str(sensordata["alt"]))
-                        print("  speed: " + str(sensordata["speed"]))
-                        print('********************************')
-                        print('')
-                        print('')
+                        #print('')
+                        #print('********************************')
+                        #print('         GPS Success')
+                        #print("    lat: " + str(sensordata["lat"]))
+                        #print("   long: " + str(sensordata["long"]))
+                        #print("    alt: " + str(sensordata["alt"]))
+                        #print("  speed: " + str(sensordata["speed"]))
+                        #print('********************************')
+                        #print('')
+                        #print('')
                     except:
                         print('')
                         print('********************************')

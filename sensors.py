@@ -59,7 +59,7 @@ class UpdateSensors(threading.Thread):
 
 
     def getData(self):
-        print("getting sensor data")
+        #print("getting sensor data")
         global sensordata
         sensordata["draw_voltage"] = ina_draw.voltage()
         try:

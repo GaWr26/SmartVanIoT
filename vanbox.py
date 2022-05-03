@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import datetime
 import board
 import serial
 import logging
@@ -41,7 +42,7 @@ modem_busy = False
 
 # Delays and times
 lastCloudUpdate = 0
-cloud_update_delay = 900
+cloud_update_delay = 300
 sim_update_counter = 0
 
 lastSensorUpdate = 0
@@ -189,6 +190,7 @@ def toggle_LEDs():
 print('')
 print('********************************')
 print('     VANBOX is starting up....')
+print("   " + str(datetime.datetime.now()))
 print('********************************')
 print('')
 print('[press ctrl+c to end the Program]')
@@ -268,7 +270,7 @@ class Manager(object):
         except:
             print("AHS not ready")
 
-        print("Sensor Data sent to MQTT broker")
+        #print("Sensor Data sent to MQTT broker")
 
 
 mgr = Manager()
@@ -376,14 +378,18 @@ while system_run:
     if lastCloudUpdate == 0 or time.time() - lastCloudUpdate >= cloud_update_delay:
         if skip_first >= 11:
             if is_online():
+                #print("Updating Cloud via WIFI")
                 cloudupdate = mgr.new_cloud_update_thread()
                 cloudupdate.start()
                 sim_update_counter = 0
             else:
                 if(sim_update_counter == 0):
                     simmodule.update_cloud(sensordata)
+                    #print("Updating Cloud via SIM")
                     sim_update_counter = sim_update_counter + 1
                     if(sim_update_counter == 4):
                         sim_update_counter = 0
+                else:
+                    print("Skipping Cloud update via SIM")
 
             lastCloudUpdate = time.time()

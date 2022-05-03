@@ -19,10 +19,10 @@ class UpdateThingspeak(threading.Thread):
         self.parent = parent
         super(UpdateThingspeak, self).__init__()
 
-    def target_with_callback(self):
+    def target_with_callback_cloud(self):
         self.method()
-        if self.callback is not None:
-            self.callback(*self.callback_args)
+        if self.callback_cloud is not None:
+            self.callback_cloud(*self.callback_cloud_args)
 
     def terminate(self):
         self._running = False
@@ -34,17 +34,17 @@ class UpdateThingspeak(threading.Thread):
         except:
             return False
 
-    def send_at(self, command,back,timeout):
-        rec_buff = ''
+    def send_at_cloud(self, command,back_cloud,timeout):
+        rec_buff_cloud = ''
         sim_serial.write((command+'\r\n').encode())
         time.sleep(timeout)
         if sim_serial.inWaiting():
             time.sleep(0.01 )
-            rec_buff = sim_serial.read(sim_serial.inWaiting())
-            if rec_buff != '':
-                if back not in rec_buff.decode():
+            rec_buff_cloud = sim_serial.read(sim_serial.inWaiting())
+            if rec_buff_cloud != '':
+                if back_cloud not in rec_buff_cloud.decode():
                     #print(command + ' ERROR')
-                    print(command + ' back:\t' + rec_buff.decode())
+                    print(command + ' back_cloud:\t' + rec_buff_cloud.decode())
                     return 0
                 else:
                     return 1
@@ -99,47 +99,47 @@ class UpdateThingspeak(threading.Thread):
 
             if sim_serial.isOpen() == False:
                 sim_serial.open()
-            self.send_at('AT+CSQ','OK',1)
-            self.send_at('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
-            self.send_at('AT+HTTPINIT','OK',1)
-            self.send_at('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field1=' + str(sensordata["humid_inside"]) + '"','OK',1)
-            self.send_at('AT+HTTPACTION=0 ','OK',1)
+            self.send_at_cloud('AT+CSQ','OK',1)
+            self.send_at_cloud('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
+            self.send_at_cloud('AT+HTTPINIT','OK',1)
+            self.send_at_cloud('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field1=' + str(sensordata["humid_inside"]) + '"','OK',1)
+            self.send_at_cloud('AT+HTTPACTION=0 ','OK',1)
             time.sleep(20)
-            self.send_at('AT+CSQ','OK',1)
-            self.send_at('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
-            self.send_at('AT+HTTPINIT','OK',1)
-            self.send_at('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field2=' + str(sensordata["temp_inside"]) + '"','OK',1)
-            self.send_at('AT+HTTPACTION=0 ','OK',1)
+            self.send_at_cloud('AT+CSQ','OK',1)
+            self.send_at_cloud('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
+            self.send_at_cloud('AT+HTTPINIT','OK',1)
+            self.send_at_cloud('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field2=' + str(sensordata["temp_inside"]) + '"','OK',1)
+            self.send_at_cloud('AT+HTTPACTION=0 ','OK',1)
             time.sleep(20)
-            self.send_at('AT+CSQ','OK',1)
-            self.send_at('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
-            self.send_at('AT+HTTPINIT','OK',1)
-            self.send_at('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field3=' + str(sensordata["draw_voltage"]) + '"','OK',1)
-            self.send_at('AT+HTTPACTION=0 ','OK',1)
+            self.send_at_cloud('AT+CSQ','OK',1)
+            self.send_at_cloud('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
+            self.send_at_cloud('AT+HTTPINIT','OK',1)
+            self.send_at_cloud('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field3=' + str(sensordata["draw_voltage"]) + '"','OK',1)
+            self.send_at_cloud('AT+HTTPACTION=0 ','OK',1)
             time.sleep(20)
-            self.send_at('AT+CSQ','OK',1)
-            self.send_at('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
-            self.send_at('AT+HTTPINIT','OK',1)
-            self.send_at('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field4=' + str(sensordata["charge_current"]) + '"','OK',1)
-            self.send_at('AT+HTTPACTION=0 ','OK',1)
+            self.send_at_cloud('AT+CSQ','OK',1)
+            self.send_at_cloud('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
+            self.send_at_cloud('AT+HTTPINIT','OK',1)
+            self.send_at_cloud('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field4=' + str(sensordata["charge_current"]) + '"','OK',1)
+            self.send_at_cloud('AT+HTTPACTION=0 ','OK',1)
             time.sleep(20)
-            self.send_at('AT+CSQ','OK',1)
-            self.send_at('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
-            self.send_at('AT+HTTPINIT','OK',1)
-            self.send_at('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field5=' + str(sensordata["draw_current"]) + '"','OK',1)
-            self.send_at('AT+HTTPACTION=0 ','OK',1)
+            self.send_at_cloud('AT+CSQ','OK',1)
+            self.send_at_cloud('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
+            self.send_at_cloud('AT+HTTPINIT','OK',1)
+            self.send_at_cloud('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field5=' + str(sensordata["draw_current"]) + '"','OK',1)
+            self.send_at_cloud('AT+HTTPACTION=0 ','OK',1)
             time.sleep(20)
-            self.send_at('AT+CSQ','OK',1)
-            self.send_at('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
-            self.send_at('AT+HTTPINIT','OK',1)
-            self.send_at('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field6=' + str(sensordata["lat"]) + '"','OK',1)
-            self.send_at('AT+HTTPACTION=0 ','OK',1)
+            self.send_at_cloud('AT+CSQ','OK',1)
+            self.send_at_cloud('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
+            self.send_at_cloud('AT+HTTPINIT','OK',1)
+            self.send_at_cloud('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field6=' + str(sensordata["lat"]) + '"','OK',1)
+            self.send_at_cloud('AT+HTTPACTION=0 ','OK',1)
             time.sleep(20)
-            self.send_at('AT+CSQ','OK',1)
-            self.send_at('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
-            self.send_at('AT+HTTPINIT','OK',1)
-            self.send_at('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field7=' + str(sensordata["long"]) + '"','OK',1)
-            self.send_at('AT+HTTPACTION=0 ','OK',1)
+            self.send_at_cloud('AT+CSQ','OK',1)
+            self.send_at_cloud('AT+CGSOCKCONT=1,"IP","CMNET"','OK',1)
+            self.send_at_cloud('AT+HTTPINIT','OK',1)
+            self.send_at_cloud('AT+HTTPPARA="URL","https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field7=' + str(sensordata["long"]) + '"','OK',1)
+            self.send_at_cloud('AT+HTTPACTION=0 ','OK',1)
             print('********************************')
             print('   SIM Cloud Update finished')
             print('********************************')

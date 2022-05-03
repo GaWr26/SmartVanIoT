@@ -6,6 +6,7 @@ import logging
 import re
 import paho.mqtt.client as mqtt
 import json
+import urllib.request
 from threading import Thread
 from subprocess import call
 from gps import UpdateGPS
@@ -13,6 +14,7 @@ from cloud import UpdateThingspeak
 from sensors import *
 from led import LED
 from sms import SMS
+from simmodule import SIMMODULE
 
 system_run = True
 
@@ -39,9 +41,9 @@ modem_busy = False
 
 # Delays and times
 lastCloudUpdate = 0
-cloud_update_delay = 3600
-lastGPSUpdate = 0
-gps_update_delay = 300
+cloud_update_delay = 900
+sim_update_counter = 0
+
 lastSensorUpdate = 0
 sensor_update_delay = 1
 lastToggle = 0
@@ -68,7 +70,7 @@ GPIO.output(RELAIS_4_GPIO, 0)
 # Taster
 GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-phone_number = "015203593625"
+
 text_message = ""
 
 active_clients = 1
@@ -92,6 +94,8 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("snowball/switch/4")
     client.subscribe("snowball/light/effect/rainbow")
     client.subscribe("snowball/switch/calibrate_capacity")
+
+    client.on_connect = ""
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
@@ -214,7 +218,10 @@ def publish_to_mqtt():
         client.publish("snowball/sensor/accelerometer_y",sensordata["acc_y"])
         client.publish("snowball/sensor/remaining_ahs",sensordata["remaining_ahs"])
         client.publish("snowball/sensor/time_remaining",sensordata["time_remaining"])
+        client.publish("snowball/position/alt", sensordata["alt"])
+        client.publish("snowball/position/speed", sensordata["speed"])
         client.publish("snowball/position/lat_long", str(sensordata["lat"]) + "," + str(sensordata["long"]) + ",0.0000000,0.0")
+
         #print("Data sent to MQTT broker")
     except:
         print("retry mqtt publish")
@@ -223,31 +230,21 @@ class Manager(object):
     global sensordata
     global phone_number
     global text_message
-    def new_gps_thread(self):
-        return UpdateGPS(parent=self)
-    def on_gps_thread_finished(self, thread, data):
-        global modem_busy
+
+    def new_simmodule_thread(self):
+        return SIMMODULE(parent=self)
+    def on_sim_data(self, thread, data):
+        #print("got sim data")
         try:
             sensordata["lat"] = data["lat"]
             sensordata["long"] = data["long"]
+            sensordata["alt"] = data["alt"]
+            sensordata["speed"] = data["speed"]
         except:
             print("not able to parse GPS Data")
-        modem_busy = False
-
-    def new_sms_thread(self):
-        return SMS(phone_number, text_message, parent=self)
-    def on_sms_thread_finished(self, thread):
-        global modem_busy
-        modem_busy = False
 
     def new_led_thread(self):
         return LED(parent=self)
-
-    def new_cloud_update_thread(self):
-        return UpdateThingspeak(sensordata, parent=self)
-    def on_cloud_update_thread_finished(self, thread):
-        global modem_busy
-        modem_busy = False
 
     def new_sensor_thread(self):
         return UpdateSensors(parent=self)
@@ -270,6 +267,19 @@ mgr = Manager()
 ledcontrol = mgr.new_led_thread()
 ledcontrol.start()
 
+simmodule = mgr.new_simmodule_thread()
+simmodule.start()
+
+sensor_thread = mgr.new_sensor_thread()
+sensor_thread.start()
+
+def is_online(host='http://google.com'):
+    try:
+        urllib.request.urlopen(host) #Python 3.x
+        return True
+    except:
+        return False
+
 while system_run:
     if GPIO.input(20) == GPIO.HIGH:
         if lastToggle == 0 or time.time() - lastToggle >= 1:
@@ -284,17 +294,14 @@ while system_run:
         print(' If this stays, system will shutdown')
         print('*************************************')
         print('')
+
         text_message = 'ACHTUNG! Die Batterie ist bei '+ str(sensordata["draw_voltage"]) + "V. Wenn das noch weiterhin so bleibt schalte ich ab."
-        modem_busy = True
-        sms_thread = mgr.new_sms_thread()
-        sms_thread.start()
+        simmodule.sendsms(text_message)
 
     if lastLowDetection > 0 and time.time() - lastLowDetection >= warning_time + power_off_time:
         print("Shit is going down!")
         text_message = 'ACHTUNG! VanBox schaltet jetzt ab um die Batterie zu retten.'
-        modem_busy = True
-        sms_thread = mgr.new_sms_thread()
-        sms_thread.start()
+        simmodule.sendsms(text_message)
         time.sleep(60)
         call("sudo shutdown -h now", shell=True)
         system_run = False
@@ -352,23 +359,57 @@ while system_run:
             skip_first = skip_first + 1
 
         #print (json.dumps(sensordata, indent=2))
-        sensor_thread = mgr.new_sensor_thread()
-        sensor_thread.start()
+
+        sensor_thread.getData()
         publish_to_mqtt()
         lastSensorUpdate = time.time()
 
-    # Update GPS Position?
-    if lastGPSUpdate == 0 or time.time() - lastGPSUpdate >= gps_update_delay:
-        if modem_busy == False:
-            modem_busy = True
-            gps_thread = mgr.new_gps_thread()
-            gps_thread.start()
-            lastGPSUpdate = time.time()
 
-    # Update thingspeak?
     if lastCloudUpdate == 0 or time.time() - lastCloudUpdate >= cloud_update_delay:
-        if modem_busy == False:
-            modem_busy = True
-            cloud_update_thread = mgr.new_cloud_update_thread()
-            cloud_update_thread.start()
+        if skip_first >= 11:
+            if is_online():
+
+                print('')
+                print('********************************')
+                print(' Starting Cloud Update via Wifi')
+                print('********************************')
+                print('')
+                print('')
+                try:
+                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field1=" + str(sensordata["humid_inside"]))
+                    time.sleep(20)
+                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field2=" + str(sensordata["temp_inside"]))
+                    time.sleep(20)
+                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field3=" + str(sensordata["draw_voltage"]))
+                    time.sleep(20)
+                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field4=" + str(sensordata["charge_current"]))
+                    time.sleep(20)
+                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field5=" + str(sensordata["draw_current"]))
+                    time.sleep(20)
+                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field6=" + str(sensordata["lat"]))
+                    time.sleep(20)
+                    urllib.request.urlopen("https://api.thingspeak.com/update?api_key=5BES7ZJMPH9KM58J&field7=" + str(sensordata["long"]))
+                    print('')
+                    print('********************************')
+                    print('  Wifi Cloud Update finished')
+                    print('********************************')
+                    print('')
+                    print('')
+
+                except:
+                    print('')
+                    print('********************************')
+                    print('  Wifi Cloud Update failed')
+                    print('********************************')
+                    print('')
+                    print('')
+                sim_update_counter = 0
+
+            else:
+                if(sim_update_counter == 0):
+                    simmodule.update_cloud(sensordata)
+                    sim_update_counter = sim_update_counter + 1
+                    if(sim_update_counter == 4):
+                        sim_update_counter = 0
+
             lastCloudUpdate = time.time()

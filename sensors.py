@@ -58,7 +58,8 @@ class UpdateSensors(threading.Thread):
         #return result
 
 
-    def run(self):
+    def getData(self):
+        print("getting sensor data")
         global sensordata
         sensordata["draw_voltage"] = ina_draw.voltage()
         try:
@@ -89,4 +90,4 @@ class UpdateSensors(threading.Thread):
         self.get_smoothed_values()
 
         self.parent and self.parent.on_sensor_thread_finished(self, sensordata)
-        self.terminate()
+        #self.terminate()

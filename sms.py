@@ -26,7 +26,7 @@ class SMS(threading.Thread):
     def terminate(self):
         self._running = False
 
-    def send_at(self, command, back,timeout):
+    def send_at(self, command, back, timeout):
         rec_buff = ''
         ser.write((command+'\r\n').encode())
         time.sleep(timeout)

@@ -105,7 +105,7 @@ def on_message(client, userdata, msg):
     global amphours_charge_total
     global amphours_draw_total
     dimmer_value = str(re.findall(r"'(.*?)'", dimmer)[0])
-    #print("Received Message: " + msg.topic+" "+str(msg.payload))
+    print("Received Message: " + msg.topic+" "+str(msg.payload))
     if msg.topic == 'snowball/light/set_color':
         ledcontrol.setLightColor(str(msg.payload)[3:9])
     elif msg.topic == 'snowball/light/dimmer':

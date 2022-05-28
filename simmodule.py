@@ -1,4 +1,6 @@
 import serial
+import serial.tools.list_ports as prtlst
+import usb.core
 import time
 import datetime
 import threading
@@ -6,8 +8,22 @@ import re
 from pynmeagps import NMEAReader
 
 
+
+usbport = 3
 #SIM & GPS Module
-sim_serial = serial.Serial('/dev/ttyUSB3',115200)
+#dev = usb.core.find(idVendor=0x1e0e, idProduct=0x9001)
+#print(dev)
+def connectModule():
+    global usbport
+    global sim_serial
+    try:
+        sim_serial = serial.Serial("/dev/ttyUSB" + str(usbport),115200)
+    except:
+        usbport = usbport +1
+        connectModule()
+
+connectModule();
+
 sim_serial.flushInput()
 
 sensordata = {}
@@ -32,23 +48,28 @@ class SIMMODULE(threading.Thread):
     def send_at(self,command,back,timeout):
         global rec_buff
         rec_buff = ''
-        sim_serial.write((command+'\r\n').encode())
-        time.sleep(timeout)
-        if sim_serial.inWaiting():
-            time.sleep(0.01 )
-            rec_buff = sim_serial.read(sim_serial.inWaiting())
-        if rec_buff != "":
-            #print("*******************************")
-            #print(rec_buff.decode())
-            #print("*******************************")
-            if back not in rec_buff.decode():
-                #print(command + ' ERROR')
-                #print(command + ' back:\t' + rec_buff.decode())
-                return 0
+        try:
+            sim_serial.write((command+'\r\n').encode())
+            time.sleep(timeout)
+            if sim_serial.inWaiting():
+                time.sleep(0.01 )
+                rec_buff = sim_serial.read(sim_serial.inWaiting())
+            if rec_buff != "":
+                #print("*******************************")
+                #print(rec_buff.decode())
+                #print("*******************************")
+                if back not in rec_buff.decode():
+                    #print(command + ' ERROR')
+                    #print(command + ' back:\t' + rec_buff.decode())
+                    return 0
+                else:
+                    return 1
             else:
-                return 1
-        else:
+                return 0
+        except:
+            print("Serial write failed")
             return 0
+
 
 
     def sendsms(self, text):
@@ -167,7 +188,7 @@ class SIMMODULE(threading.Thread):
         time.sleep(2)
         while True:
             if gps_active:
-                answer = self.send_at('AT+CGPSINFO','+CGPSINFO: ',1)
+                answer = self.send_at('AT+CGPSINFO','+CGPSINFO: ',0.5)
                 #print("gps poll...")
                 if 1 == answer:
                     answer = 0
@@ -179,10 +200,9 @@ class SIMMODULE(threading.Thread):
                         sensordata["long"] = 0
                         time.sleep(1)
                     else:
-
-                        last_position = rec_buff.decode()
-                        gps_list = last_position.split(",")
                         try:
+                            last_position = rec_buff.decode()
+                            gps_list = last_position.split(",")
                             lat = float(last_position[25:36])#/100
                             long = float(last_position[39:51])#/100
 
